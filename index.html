@@ -1,0 +1,1671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The PatchWork™ | Expert Web Development & Design Services</title>
+<meta name="description" content="Professional support for your business growth.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ══ TOKENS ══ */
+:root{
+  --pu:#7c3aed; --pu-d:#6d28d9; --pu-dd:#4c1d95;
+  --pu-l:#ede9fe; --pu-m:#c4b5fd; --pu-bg:#f5f3ff;
+  --pu-badge:#f3f0ff; --pu-bb:#e0d9ff;
+  --tl:#0d9488; --tl-l:#ccfbf1;
+  --wh:#fff; --off:#fafafa; --lbg:#f8f7ff;
+  --dk:#1a1a2e; --dk2:#16213e;
+  --tx:#374151; --tx2:#4b5563; --mt:#6b7280;
+  --br:#e5e7eb; --brp:#ddd6fe;
+  --sans:'Raleway',sans-serif; --body:'Inter',system-ui,sans-serif;
+  --r:10px;
+  --s1:0 2px 12px rgba(124,58,237,.09);
+  --s2:0 8px 35px rgba(124,58,237,.14);
+  --s3:0 20px 65px rgba(124,58,237,.2);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--wh);color:var(--tx);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{text-decoration:none}
+img{display:block;max-width:100%;object-fit:cover}
+
+/* ══ LOADER ══ */
+.loader{
+  position:fixed;inset:0;z-index:9999;background:var(--pu);
+  display:flex;align-items:center;justify-content:center;
+  transition:opacity .5s ease,visibility .5s ease;
+}
+.loader.done{opacity:0;visibility:hidden}
+.loader span{
+  font-family:var(--sans);font-size:1.8rem;font-weight:900;color:#fff;
+  animation:ldPulse 1s ease infinite alternate;
+  letter-spacing:-.02em;
+}
+@keyframes ldPulse{from{opacity:.3;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+
+/* ══ BACK TO TOP ══ */
+.btt{
+  position:fixed;bottom:2rem;right:2rem;z-index:100;
+  width:46px;height:46px;border-radius:50%;
+  background:var(--pu);color:#fff;border:none;cursor:pointer;
+  font-size:1.1rem;box-shadow:0 4px 18px rgba(124,58,237,.4);
+  opacity:0;transform:translateY(16px);pointer-events:none;
+  transition:opacity .3s,transform .3s,box-shadow .3s;
+  display:flex;align-items:center;justify-content:center;
+}
+.btt.show{opacity:1;transform:none;pointer-events:all}
+.btt:hover{box-shadow:0 8px 28px rgba(124,58,237,.55);transform:translateY(-2px)}
+
+/* ══ NAV ══ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;height:70px;padding:0 5%;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(255,255,255,.96);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--br);
+  box-shadow:0 1px 14px rgba(0,0,0,.06);
+  transition:height .35s,box-shadow .35s;
+}
+nav.scrolled{height:58px;box-shadow:var(--s2)}
+.logo{display:flex;align-items:center;gap:.55rem;transition:opacity .2s}
+.logo:hover{opacity:.8}
+.logo-icon{
+  width:36px;height:36px;background:var(--pu);border-radius:9px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--sans);font-size:1rem;font-style:italic;font-weight:900;color:#fff;
+  transition:transform .3s,box-shadow .3s;
+}
+.logo:hover .logo-icon{transform:rotate(-8deg) scale(1.08);box-shadow:0 4px 16px rgba(124,58,237,.4)}
+.logo-text .the{display:block;font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mt)}
+.logo-text .brand{display:block;font-family:var(--sans);font-size:1.1rem;font-weight:900;color:var(--dk)}
+.logo-text .brand span{color:var(--pu)}
+.navlinks{display:flex;align-items:center;gap:1.8rem;list-style:none}
+.navlinks a{font-size:.86rem;font-weight:600;color:var(--tx2);position:relative;padding-bottom:2px;transition:color .2s}
+.navlinks a::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--pu);transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.4,0,.2,1)}
+.navlinks a:hover{color:var(--pu)}
+.navlinks a:hover::after,.navlinks a.act::after{transform:scaleX(1)}
+.navlinks a.act{color:var(--pu)}
+.nav-btn{
+  background:var(--pu);color:#fff;padding:.58rem 1.5rem;border-radius:7px;
+  font-family:var(--sans);font-size:.84rem;font-weight:700;
+  border:2px solid var(--pu);
+  box-shadow:0 4px 14px rgba(124,58,237,.32);
+  transition:background .25s,transform .2s,box-shadow .25s;
+}
+.nav-btn:hover{background:var(--pu-d);border-color:var(--pu-d);transform:translateY(-2px);box-shadow:0 7px 22px rgba(124,58,237,.42)}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.burger span{width:22px;height:2px;background:var(--dk);border-radius:2px;transition:.3s;display:block}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ══ MOBILE MENU ══ */
+.mmenu{
+  display:none;position:fixed;inset:0;z-index:300;background:#fff;
+  flex-direction:column;align-items:center;justify-content:center;gap:2.2rem;
+}
+.mmenu.open{display:flex}
+.mmenu a{font-family:var(--sans);font-size:1.9rem;font-weight:800;color:var(--dk);transition:color .2s}
+.mmenu a:hover{color:var(--pu)}
+.mclose{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;font-size:2rem;cursor:pointer;color:var(--tx)}
+
+/* ══ BUTTONS ══ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.45rem;
+  padding:.82rem 2rem;border-radius:7px;
+  font-family:var(--sans);font-size:.875rem;font-weight:700;letter-spacing:.02em;
+  white-space:nowrap;border:2px solid transparent;cursor:pointer;
+  position:relative;overflow:hidden;
+  transition:background .25s,transform .22s,box-shadow .25s,color .22s,border-color .22s;
+}
+.btn::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.13);transform:translateX(-100%);transition:transform .4s ease}
+.btn:hover::before{transform:translateX(0)}
+.btn-pu{background:var(--pu);color:#fff;border-color:var(--pu);box-shadow:0 4px 16px rgba(124,58,237,.3)}
+.btn-pu:hover{background:var(--pu-d);border-color:var(--pu-d);transform:translateY(-2px);box-shadow:0 8px 28px rgba(124,58,237,.42)}
+.btn-out{background:transparent;color:var(--pu);border-color:var(--pu)}
+.btn-out:hover{background:var(--pu);color:#fff;transform:translateY(-2px)}
+.btn-wh{background:#fff;color:var(--pu);border-color:transparent;box-shadow:0 4px 18px rgba(0,0,0,.1)}
+.btn-wh:hover{background:var(--pu-l);transform:translateY(-2px)}
+.btn-row{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+
+/* ══ CHIPS ══ */
+.chip{
+  display:inline-flex;align-items:center;gap:.45rem;
+  font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--pu);background:var(--pu-badge);border:1px solid var(--pu-bb);
+  padding:.28rem .9rem;border-radius:100px;margin-bottom:1rem;
+}
+.chip.inv{background:rgba(196,181,253,.15);color:var(--pu-m);border-color:rgba(196,181,253,.25)}
+.chip.tl{background:var(--tl-l);color:var(--tl);border-color:rgba(13,148,136,.2)}
+
+/* ══ SECTION TITLES ══ */
+.stitle{font-family:var(--sans);font-size:clamp(1.9rem,3.4vw,2.85rem);font-weight:800;line-height:1.1;color:var(--dk)}
+.stitle span{color:var(--pu)}
+.stitle em{color:var(--pu);font-style:italic}
+.stitle.light{color:#fff}
+.stitle.light span{color:var(--pu-m)}
+.ssub{font-size:.95rem;line-height:1.85;color:var(--mt);max-width:540px;margin-top:.75rem}
+.ssub.light{color:rgba(255,255,255,.65)}
+
+/* ══ REVEAL ══ */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s cubic-bezier(.4,0,.2,1)}
+.rv.on{opacity:1;transform:none}
+.rvl{opacity:0;transform:translateX(-36px);transition:opacity .7s ease,transform .7s ease}
+.rvl.on{opacity:1;transform:none}
+.rvr{opacity:0;transform:translateX(36px);transition:opacity .7s ease,transform .7s ease}
+.rvr.on{opacity:1;transform:none}
+.rvs{opacity:0;transform:scale(.94);transition:opacity .65s ease,transform .65s ease}
+.rvs.on{opacity:1;transform:scale(1)}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+.d4{transition-delay:.32s}.d5{transition-delay:.40s}
+
+/* ════════════════════════════════
+   HERO  — split layout
+════════════════════════════════ */
+#hero{
+  min-height:100vh;
+  display:grid;grid-template-columns:1fr 1fr;
+  align-items:center;
+  padding:8rem 5% 5rem;
+  gap:4rem;
+  position:relative;overflow:hidden;
+  background:var(--wh);
+}
+.hero-blob{
+  position:absolute;top:-200px;right:-150px;
+  width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(124,58,237,.08) 0%,transparent 68%);
+  pointer-events:none;
+}
+.hero-blob2{
+  position:absolute;bottom:-120px;left:-80px;
+  width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(13,148,136,.06) 0%,transparent 68%);
+  pointer-events:none;
+}
+.hero-left{position:relative;z-index:2}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.55rem;
+  background:var(--pu-badge);border:1px solid var(--pu-bb);
+  padding:.42rem 1.15rem;border-radius:100px;
+  font-size:.78rem;font-weight:600;color:var(--pu);
+  margin-bottom:1.6rem;box-shadow:var(--s1);
+  animation:fadeUp .7s ease .1s both;
+}
+.hero-h1{
+  font-family:var(--sans);font-size:clamp(2.5rem,4.5vw,4rem);
+  font-weight:900;line-height:1.05;color:var(--dk);
+  letter-spacing:-.025em;margin-bottom:1.3rem;
+  animation:fadeUp .8s ease .2s both;
+}
+.hero-h1 em{color:var(--pu);font-style:italic}
+.hero-p{
+  font-size:1rem;line-height:1.88;color:var(--mt);
+  max-width:460px;margin-bottom:2.2rem;
+  animation:fadeUp .8s ease .3s both;
+}
+.hero-ctas{display:flex;gap:.85rem;flex-wrap:wrap;animation:fadeUp .8s ease .4s both}
+/* Stats row below CTA */
+.hero-stats{
+  display:flex;gap:2.5rem;margin-top:2.5rem;
+  padding-top:2rem;border-top:1px solid var(--br);
+  animation:fadeUp .8s ease .5s both;
+}
+.hero-stat-num{
+  font-family:var(--sans);font-size:1.8rem;font-weight:900;color:var(--pu);line-height:1;
+}
+.hero-stat-label{font-size:.75rem;color:var(--mt);margin-top:.2rem}
+
+/* Right: stacked image collage */
+.hero-right{
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;
+  gap:1rem;
+  animation:fadeUp .9s ease .35s both;
+}
+.hero-img-main{
+  grid-column:1/-1;
+  border-radius:16px;overflow:hidden;height:240px;
+  box-shadow:var(--s3);
+}
+.hero-img-main img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.hero-img-main:hover img{transform:scale(1.04)}
+.hero-img-s{
+  border-radius:12px;overflow:hidden;height:150px;
+  box-shadow:var(--s2);
+}
+.hero-img-s img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.hero-img-s:hover img{transform:scale(1.06)}
+/* Floating card on hero */
+.hero-float-card{
+  position:absolute;bottom:-16px;left:-24px;
+  background:#fff;border:1px solid var(--brp);
+  border-radius:14px;padding:.9rem 1.3rem;
+  box-shadow:0 12px 40px rgba(124,58,237,.15);
+  display:flex;align-items:center;gap:.8rem;
+  animation:floatCard 4s ease infinite;
+  z-index:5;
+}
+@keyframes floatCard{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.hfc-icon{
+  width:40px;height:40px;border-radius:10px;
+  background:var(--pu-l);display:flex;align-items:center;justify-content:center;font-size:1.2rem;
+}
+.hfc-label{font-size:.7rem;font-weight:700;color:var(--mt);text-transform:uppercase;letter-spacing:.08em}
+.hfc-val{font-family:var(--sans);font-size:1rem;font-weight:800;color:var(--dk)}
+/* Second floating card */
+.hero-float-card2{
+  position:absolute;top:-10px;right:-16px;
+  background:var(--pu);border-radius:12px;padding:.75rem 1.1rem;
+  box-shadow:0 8px 28px rgba(124,58,237,.35);
+  animation:floatCard 5s ease 1.5s infinite;
+  z-index:5;
+}
+.hfc2-val{font-family:var(--sans);font-size:1.1rem;font-weight:900;color:#fff}
+.hfc2-label{font-size:.65rem;font-weight:600;color:rgba(255,255,255,.7);margin-top:.1rem}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+
+/* ══ MARQUEE ══ */
+.mbar{background:var(--pu);padding:.9rem 0;overflow:hidden}
+.mtrack{display:flex;animation:marquee 26s linear infinite;white-space:nowrap}
+.mi{display:inline-flex;align-items:center;gap:.75rem;padding:0 2rem;font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.85)}
+.ms{color:rgba(255,255,255,.35)}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ════════════════════════════════
+   SERVICES  — creative bento grid
+════════════════════════════════ */
+#services{
+  padding:7rem 5%;
+  background:var(--dk);
+  position:relative;overflow:hidden;
+}
+#services::before{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(124,58,237,.06) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(124,58,237,.06) 1px,transparent 1px);
+  background-size:55px 55px;
+  pointer-events:none;
+}
+.svc-intro{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:4rem;gap:2rem;flex-wrap:wrap;position:relative;z-index:2}
+.svc-intro-left .stitle{margin-bottom:.5rem}
+.svc-count{
+  font-family:var(--sans);font-size:5rem;font-weight:900;
+  color:rgba(196,181,253,.12);line-height:1;
+  position:absolute;top:-1rem;right:0;pointer-events:none;
+  letter-spacing:-.04em;
+}
+
+/* BENTO GRID */
+.bento{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  grid-auto-rows:minmax(80px,auto);
+  gap:1.1rem;
+  position:relative;z-index:2;
+}
+
+/* Base card */
+.bc{
+  border-radius:16px;overflow:hidden;position:relative;
+  background:#1e1b4b;border:1px solid rgba(196,181,253,.1);
+  transition:transform .35s cubic-bezier(.4,0,.2,1),box-shadow .35s ease,border-color .3s;
+  cursor:default;
+}
+.bc:hover{transform:translateY(-5px) scale(1.01);box-shadow:0 20px 60px rgba(124,58,237,.3);border-color:rgba(196,181,253,.3)}
+
+/* Column spans */
+.bc-5{grid-column:span 5}
+.bc-4{grid-column:span 4}
+.bc-3{grid-column:span 3}
+.bc-7{grid-column:span 7}
+.bc-6{grid-column:span 6}
+.bc-8{grid-column:span 8}
+.bc-full{grid-column:1/-1}
+
+/* Row spans */
+.bc-r3{grid-row:span 3}
+.bc-r4{grid-row:span 4}
+.bc-r2{grid-row:span 2}
+
+/* Featured (tall image left) */
+.bc-feat{
+  background:transparent;border:none;
+  display:grid;grid-template-rows:1fr auto;
+}
+.bc-feat .bc-img{flex:1;height:100%;min-height:280px}
+.bc-img{width:100%;position:relative;overflow:hidden}
+.bc-img img{width:100%;height:100%;object-fit:cover;filter:saturate(.8);transition:transform .55s ease,filter .4s ease}
+.bc:hover .bc-img img{transform:scale(1.07);filter:saturate(1)}
+.bc-img-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,rgba(17,12,60,.85) 100%)}
+/* Content over image */
+.bc-over{position:absolute;bottom:0;left:0;right:0;padding:1.4rem 1.5rem}
+.bc-over .bc-ico{font-size:1.4rem;margin-bottom:.5rem}
+.bc-over .bc-name{font-family:var(--sans);font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:.3rem}
+.bc-over .bc-desc{font-size:.78rem;line-height:1.6;color:rgba(255,255,255,.65)}
+.bc-over .bc-link{
+  display:inline-flex;align-items:center;gap:.3rem;margin-top:.7rem;
+  font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--pu-m);transition:gap .2s,color .2s;
+}
+.bc-over .bc-link:hover{gap:.55rem;color:#fff}
+
+/* Text-only card (dark purple bg) */
+.bc-txt{padding:1.6rem 1.8rem;display:flex;flex-direction:column;justify-content:space-between}
+.bc-txt .bc-ico{
+  width:44px;height:44px;border-radius:10px;
+  background:rgba(196,181,253,.12);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;margin-bottom:1rem;
+  transition:background .3s;
+}
+.bc:hover .bc-txt .bc-ico{background:var(--pu)}
+.bc-txt .bc-name{font-family:var(--sans);font-size:.98rem;font-weight:800;color:#fff;margin-bottom:.5rem}
+.bc-txt .bc-desc{font-size:.79rem;line-height:1.65;color:rgba(255,255,255,.5);flex:1}
+.bc-txt .bc-link{
+  display:inline-flex;align-items:center;gap:.3rem;margin-top:.9rem;
+  font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--pu-m);transition:gap .2s,color .2s;
+}
+.bc-txt .bc-link:hover{gap:.55rem;color:#fff}
+.bc-num{
+  font-family:var(--sans);font-size:3.5rem;font-weight:900;
+  color:rgba(196,181,253,.08);position:absolute;bottom:.5rem;right:1rem;
+  line-height:1;pointer-events:none;letter-spacing:-.03em;
+}
+
+/* Accent card variants */
+.bc-pu{background:var(--pu)!important;border-color:var(--pu)!important}
+.bc-pu .bc-txt .bc-ico{background:rgba(255,255,255,.2)}
+.bc-pu .bc-txt .bc-name{color:#fff}
+.bc-pu .bc-txt .bc-desc{color:rgba(255,255,255,.7)}
+.bc-pu .bc-txt .bc-link{color:rgba(255,255,255,.8)}
+.bc-pu .bc-txt .bc-link:hover{color:#fff}
+.bc-pu .bc-num{color:rgba(255,255,255,.08)}
+.bc-pu:hover{background:var(--pu-d)!important}
+
+.bc-tl{background:linear-gradient(135deg,#0f766e,#0d9488)!important;border-color:#0d9488!important}
+.bc-tl .bc-txt .bc-ico{background:rgba(255,255,255,.18)}
+.bc-tl .bc-txt .bc-name,.bc-tl .bc-txt .bc-desc,.bc-tl .bc-txt .bc-link{color:#fff}
+
+/* Wide horizontal image card */
+.bc-wide .bc-img{height:200px}
+
+/* ════════════════════════════════
+   LIVE CHAT SECTION
+   — full-bleed split with tilted image
+════════════════════════════════ */
+#livechat{
+  padding:0;
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:600px;
+  overflow:hidden;
+}
+.lc-visual{
+  position:relative;overflow:hidden;
+  background:linear-gradient(135deg,var(--dk) 0%,var(--pu-dd) 100%);
+}
+.lc-visual img{
+  width:100%;height:100%;object-fit:cover;opacity:.35;
+  transition:transform .6s ease;
+}
+.lc-visual:hover img{transform:scale(1.04)}
+.lc-visual-content{
+  position:absolute;inset:0;padding:4rem;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.lc-label{
+  font-size:.68rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,.4);margin-bottom:1.5rem;
+}
+/* Chat bubbles */
+.chat-wrap{display:flex;flex-direction:column;gap:.7rem}
+.chat-b{
+  border-radius:14px 14px 14px 3px;
+  padding:.9rem 1.15rem;
+  font-size:.84rem;line-height:1.6;
+  max-width:82%;
+  backdrop-filter:blur(8px);
+  transform:translateX(-24px);opacity:0;
+  transition:all .6s ease;
+}
+.chat-b.agent{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.9)}
+.chat-b.user{
+  background:var(--pu);color:#fff;
+  border-radius:14px 14px 3px 14px;
+  align-self:flex-end;margin-left:auto;
+  transform:translateX(24px);
+}
+.chat-b.agent2{transition-delay:.25s}
+.lc-visual.on .chat-b{transform:none;opacity:1}
+.lc-visual.on .chat-b.agent2{transition-delay:.3s}
+.lc-visual.on .chat-b.user{transition-delay:.15s}
+.lc-avail{
+  display:inline-flex;align-items:center;gap:.5rem;margin-top:1.5rem;
+  background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.22);
+  padding:.4rem .9rem;border-radius:100px;
+  font-size:.72rem;font-weight:600;color:#6ee7b7;
+  align-self:flex-start;
+}
+.gdot{width:7px;height:7px;border-radius:50%;background:#34d399;box-shadow:0 0 6px #34d399;animation:blink 2s infinite;flex-shrink:0}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+
+.lc-text{
+  padding:5rem 4.5rem;
+  display:flex;flex-direction:column;justify-content:center;
+  background:var(--wh);
+}
+.lc-text .stitle{margin-bottom:1rem}
+.lc-text p{font-size:.94rem;line-height:1.88;color:var(--mt);margin-bottom:1.8rem}
+.check-list{list-style:none;margin-bottom:2rem}
+.check-list li{
+  display:flex;align-items:center;gap:.7rem;
+  padding:.55rem 0;font-size:.88rem;color:var(--tx);
+  border-bottom:1px solid var(--br);
+}
+.check-list li:last-child{border:none}
+.check-list li::before{
+  content:'✓';width:22px;height:22px;flex-shrink:0;
+  background:var(--pu);color:#fff;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.65rem;font-weight:700;
+}
+.cta-link{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.84rem;font-weight:700;color:var(--pu);
+  transition:color .2s,gap .2s;
+}
+.cta-link:hover{color:var(--pu-d);gap:.8rem}
+
+/* ════════════════════════════════
+   WHY CHOOSE US
+   — large number showcase
+════════════════════════════════ */
+#why{
+  padding:7rem 5%;
+  background:linear-gradient(135deg,var(--dk) 0%,#1a0a3c 100%);
+  position:relative;overflow:hidden;
+}
+.why-bg-text{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:var(--sans);font-size:clamp(80px,14vw,180px);font-weight:900;
+  color:rgba(124,58,237,.05);white-space:nowrap;letter-spacing:-.04em;
+  pointer-events:none;user-select:none;
+}
+.why-header{text-align:center;position:relative;z-index:2;margin-bottom:5rem}
+.why-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:rgba(196,181,253,.08);
+  border:1px solid rgba(196,181,253,.08);
+  border-radius:20px;overflow:hidden;
+  position:relative;z-index:2;
+}
+.why-item{
+  padding:3rem 2rem;text-align:center;
+  background:rgba(255,255,255,.02);
+  transition:background .35s;
+  position:relative;
+}
+.why-item:hover{background:rgba(124,58,237,.12)}
+.why-item::after{
+  content:'';position:absolute;right:0;top:20%;bottom:20%;
+  width:1px;background:rgba(196,181,253,.1);
+}
+.why-item:last-child::after{display:none}
+.why-big{
+  font-family:var(--sans);font-size:clamp(3rem,5vw,5rem);font-weight:900;
+  color:var(--pu-m);line-height:1;margin-bottom:.4rem;
+  display:block;
+}
+.why-title{font-family:var(--sans);font-size:1rem;font-weight:700;color:#fff;margin-bottom:.5rem}
+.why-desc{font-size:.82rem;color:rgba(255,255,255,.42);line-height:1.7}
+
+/* ════════════════════════════════
+   EFFICIENCY  — diagonal split
+════════════════════════════════ */
+#efficiency{
+  padding:7rem 5%;
+  background:var(--lbg);
+  position:relative;
+}
+.eff-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.eff-img-stack{position:relative}
+.eff-img-main{
+  border-radius:20px;overflow:hidden;height:420px;
+  box-shadow:var(--s3);
+}
+.eff-img-main img{width:100%;height:100%;object-fit:cover;filter:saturate(.85);transition:transform .5s ease,filter .5s ease}
+.eff-img-main:hover img{transform:scale(1.04);filter:saturate(1)}
+/* Stat overlay card */
+.eff-stat-card{
+  position:absolute;bottom:-24px;right:-24px;
+  background:#fff;border:1px solid var(--brp);
+  border-radius:18px;padding:1.6rem 2rem;
+  box-shadow:0 16px 50px rgba(124,58,237,.15);
+  min-width:200px;
+}
+.eff-stat-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--pu),var(--tl));
+  border-radius:18px 18px 0 0;
+}
+.eff-pct{font-family:var(--sans);font-size:3.5rem;font-weight:900;color:var(--pu);line-height:1}
+.eff-pct-lbl{font-size:.75rem;font-weight:600;color:var(--mt);margin-top:.2rem}
+.eff-mini-bars{margin-top:1.2rem;display:flex;flex-direction:column;gap:.5rem}
+.eff-mini-bar{height:5px;background:var(--br);border-radius:100px;overflow:hidden}
+.eff-mini-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--pu),var(--tl));transform-origin:left;transform:scaleX(0);animation:grow 1.4s ease forwards}
+@keyframes grow{to{transform:scaleX(1)}}
+
+.eff-text .stitle{margin-bottom:1rem}
+.eff-text p{font-size:.93rem;line-height:1.88;color:var(--mt);margin-bottom:1.5rem}
+.eff-list{list-style:none;margin-bottom:2rem}
+.eff-list li{
+  display:flex;align-items:flex-start;gap:.75rem;
+  padding:.6rem 0;font-size:.88rem;color:var(--tx);
+  border-bottom:1px solid var(--br);
+}
+.eff-list li:last-child{border:none}
+.eff-list li::before{content:'→';color:var(--pu);font-weight:700;flex-shrink:0;margin-top:.05rem}
+
+/* ════════════════════════════════
+   TRUSTED  — logo marquee
+════════════════════════════════ */
+#trusted{
+  padding:4.5rem 5%;
+  border-top:1px solid var(--br);
+  border-bottom:1px solid var(--br);
+  background:var(--wh);
+  overflow:hidden;
+}
+.trusted-head{text-align:center;margin-bottom:2.8rem}
+.trusted-head p{font-size:.82rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mt)}
+.clients-row{display:flex;gap:1.5rem;align-items:center;justify-content:center;flex-wrap:wrap}
+.client-box{
+  width:130px;height:54px;background:var(--lbg);border:1px solid var(--br);
+  border-radius:8px;display:flex;align-items:center;justify-content:center;
+  font-size:.72rem;font-weight:700;color:var(--mt);letter-spacing:.08em;text-transform:uppercase;
+  transition:border-color .25s,background .25s,transform .25s,box-shadow .25s;
+}
+.client-box:hover{border-color:var(--brp);background:var(--pu-l);transform:translateY(-2px);box-shadow:var(--s1)}
+
+/* ════════════════════════════════
+   BUSINESS SOLUTIONS  — alternating rows
+════════════════════════════════ */
+#solutions{padding:7rem 5%;background:var(--wh)}
+.sol-header{margin-bottom:4rem}
+.sol-rows{display:flex;flex-direction:column;gap:1.5px;background:var(--br)}
+.sol-row{
+  display:grid;grid-template-columns:80px 1fr 300px auto;
+  gap:0;align-items:stretch;
+  background:var(--wh);
+  transition:background .3s;
+}
+.sol-row:hover{background:var(--pu-bg)}
+.sol-cell{padding:2.2rem;border-right:1px solid var(--br);display:flex;align-items:center}
+.sol-cell:last-child{border-right:none}
+.sol-idx{
+  font-family:var(--sans);font-size:1.4rem;font-weight:900;
+  color:var(--brp);justify-content:center;
+  transition:color .3s;
+}
+.sol-row:hover .sol-idx{color:var(--pu)}
+.sol-name-cell{flex-direction:column;align-items:flex-start;gap:.4rem}
+.sol-name{font-family:var(--sans);font-size:1.05rem;font-weight:800;color:var(--dk);transition:color .3s}
+.sol-row:hover .sol-name{color:var(--pu)}
+.sol-tags{display:flex;gap:.4rem;flex-wrap:wrap}
+.sol-tag{font-size:.64rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--pu-l);color:var(--pu);padding:.18rem .55rem;border-radius:100px}
+.sol-desc{font-size:.83rem;color:var(--mt);line-height:1.7}
+.sol-arrow{
+  justify-content:center;
+  font-size:1.3rem;color:var(--brp);
+  transition:color .3s,transform .3s;
+}
+.sol-row:hover .sol-arrow{color:var(--pu);transform:translateX(5px)}
+
+/* ════════════════════════════════
+   TESTIMONIALS  — masonry-style
+════════════════════════════════ */
+#testimonials{padding:7rem 5%;background:var(--lbg)}
+.t-header{margin-bottom:3.5rem}
+.t-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1.5rem;align-items:start;
+}
+.t-card{
+  background:var(--wh);border:1.5px solid var(--br);border-radius:16px;
+  padding:2.4rem;
+  transition:transform .35s ease,box-shadow .35s ease,border-color .3s;
+  position:relative;overflow:hidden;
+}
+.t-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--pu),var(--tl));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .4s ease;
+}
+.t-card:hover{transform:translateY(-5px);box-shadow:var(--s3);border-color:var(--brp)}
+.t-card:hover::before{transform:scaleX(1)}
+.t-card.featured{
+  background:linear-gradient(135deg,var(--pu-dd) 0%,var(--dk) 100%);
+  border-color:var(--pu);
+  grid-row:span 1;
+}
+.t-card.featured .t-qmark{color:rgba(196,181,253,.3)}
+.t-card.featured .t-txt{color:rgba(255,255,255,.82)}
+.t-card.featured .t-name{color:#fff}
+.t-card.featured .t-role{color:rgba(255,255,255,.5)}
+.t-card.featured .t-av{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2)}
+.t-stars{color:#f59e0b;font-size:.85rem;margin-bottom:.8rem;letter-spacing:.06em}
+.t-qmark{font-family:serif;font-size:4.5rem;line-height:.7;color:var(--pu-m);opacity:.55;margin-bottom:.5rem}
+.t-txt{font-size:.88rem;line-height:1.88;color:var(--tx);font-style:italic;margin-bottom:1.8rem}
+.t-auth{display:flex;align-items:center;gap:.9rem}
+.t-av{
+  width:44px;height:44px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,var(--pu),var(--pu-d));
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--sans);font-weight:800;font-size:1rem;color:#fff;
+}
+.t-name{font-weight:700;font-size:.88rem;color:var(--dk)}
+.t-role{font-size:.76rem;color:var(--mt);margin-top:.1rem}
+
+/* ════════════════════════════════
+   PACKAGES  — horizontal scroll cards
+════════════════════════════════ */
+#packages{padding:7rem 5%;background:var(--wh)}
+.pkg-header{text-align:center;margin-bottom:3.5rem}
+.pkg-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;align-items:stretch}
+.pkg-card{
+  border:1.5px solid var(--br);border-radius:16px;
+  padding:2.4rem 2rem;display:flex;flex-direction:column;
+  position:relative;background:var(--wh);
+  transition:transform .35s ease,box-shadow .35s ease,border-color .3s;
+}
+.pkg-card::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--pu),var(--pu-d));
+  border-radius:14px 14px 0 0;
+}
+.pkg-card:hover{transform:translateY(-5px);box-shadow:var(--s3);border-color:var(--brp)}
+.pkg-card.star{border-color:var(--pu);background:linear-gradient(160deg,var(--pu-bg) 0%,var(--wh) 100%)}
+.pkg-card.star::before{
+  content:'POPULAR';position:absolute;top:-11px;left:50%;transform:translateX(-50%);
+  background:var(--pu);color:#fff;font-size:.62rem;font-weight:700;
+  letter-spacing:.12em;padding:.22rem .8rem;border-radius:100px;
+}
+.pkg-name{font-family:var(--sans);font-size:1.3rem;font-weight:800;color:var(--dk);margin-bottom:.2rem}
+.pkg-ideal{font-size:.76rem;color:var(--mt);margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--br)}
+.pkg-feats{list-style:none;flex:1;margin-bottom:1.8rem}
+.pkg-feats li{
+  display:flex;align-items:flex-start;gap:.55rem;padding:.5rem 0;
+  font-size:.84rem;color:var(--tx);border-bottom:1px solid var(--br);line-height:1.5;
+}
+.pkg-feats li:last-child{border:none}
+.pkg-feats li::before{
+  content:'✓';width:17px;height:17px;flex-shrink:0;
+  background:var(--pu-l);color:var(--pu);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.6rem;font-weight:700;margin-top:.15rem;
+}
+.pkg-btn{align-self:stretch;padding:.78rem 1.5rem;font-size:.84rem}
+
+/* ════════════════════════════════
+   COMMUNITY  — full bg image + text
+════════════════════════════════ */
+#community{
+  position:relative;overflow:hidden;
+  min-height:480px;display:flex;align-items:center;
+}
+#community img.com-bg{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.6);
+}
+.com-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(76,29,149,.93) 0%,rgba(26,26,46,.88) 100%);
+}
+.com-grid-lines{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(196,181,253,.04) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(196,181,253,.04) 1px,transparent 1px);
+  background-size:42px 42px;
+}
+.com-inner{
+  position:relative;z-index:2;
+  padding:6.5rem 5%;width:100%;
+  display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;
+}
+.com-left .stitle{margin-bottom:1rem}
+.com-left p{font-size:.95rem;line-height:1.85;color:rgba(255,255,255,.65);margin-bottom:2rem}
+.com-bullets{list-style:none;margin-bottom:2.5rem;display:flex;flex-direction:column;gap:.75rem}
+.com-bullets li{
+  display:flex;align-items:center;gap:.7rem;
+  font-size:.88rem;color:rgba(255,255,255,.85);font-weight:500;
+}
+.com-bullets li::before{
+  content:'✓';width:20px;height:20px;border-radius:50%;
+  background:rgba(255,255,255,.14);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.63rem;font-weight:700;flex-shrink:0;
+}
+/* Right: floating benefit boxes */
+.com-right{display:flex;flex-direction:column;gap:1rem}
+.com-box{
+  background:rgba(255,255,255,.07);border:1px solid rgba(196,181,253,.15);
+  border-radius:14px;padding:1.4rem 1.6rem;
+  display:flex;align-items:center;gap:1rem;
+  backdrop-filter:blur(6px);
+  transition:background .3s,border-color .3s;
+}
+.com-box:hover{background:rgba(124,58,237,.2);border-color:rgba(196,181,253,.3)}
+.com-box-ico{font-size:1.5rem;flex-shrink:0}
+.com-box-title{font-family:var(--sans);font-size:.9rem;font-weight:700;color:#fff}
+.com-box-sub{font-size:.78rem;color:rgba(255,255,255,.5);margin-top:.15rem}
+
+/* ════════════════════════════════
+   BLOG  — editorial card
+════════════════════════════════ */
+#blog{padding:7rem 5%;background:var(--lbg)}
+.blog-header{margin-bottom:2.5rem}
+.blog-card{
+  display:grid;grid-template-columns:1.3fr 1fr;
+  background:var(--wh);border:1.5px solid var(--br);border-radius:20px;
+  overflow:hidden;max-width:860px;
+  box-shadow:var(--s2);
+  transition:box-shadow .35s,transform .35s;
+}
+.blog-card:hover{box-shadow:var(--s3);transform:translateY(-4px)}
+.blog-img{height:100%;min-height:260px;overflow:hidden;position:relative}
+.blog-img img{width:100%;height:100%;object-fit:cover;filter:saturate(.85);transition:transform .5s ease,filter .4s ease}
+.blog-card:hover .blog-img img{transform:scale(1.05);filter:saturate(1)}
+.blog-body{padding:2.5rem;display:flex;flex-direction:column;justify-content:center}
+.blog-meta{display:flex;gap:1rem;font-size:.74rem;color:var(--mt);margin-bottom:.8rem}
+.blog-title{font-family:var(--sans);font-size:1.25rem;font-weight:800;color:var(--dk);line-height:1.35;margin-bottom:1rem}
+.blog-lnk{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-size:.78rem;font-weight:700;color:var(--pu);
+  text-transform:uppercase;letter-spacing:.05em;
+  transition:gap .25s,color .2s;
+}
+.blog-lnk:hover{gap:.7rem;color:var(--pu-d)}
+
+/* ════════════════════════════════
+   CONTACT  — two-panel
+════════════════════════════════ */
+#contact{padding:7rem 5%;background:var(--wh)}
+.ct-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:5.5rem;align-items:start}
+.ct-info .stitle{margin-bottom:1rem}
+.ct-info .ssub{margin-bottom:2rem}
+/* Contact image */
+.ct-img{
+  border-radius:16px;overflow:hidden;height:220px;
+  box-shadow:var(--s2);margin-bottom:2rem;
+  position:relative;
+}
+.ct-img img{width:100%;height:100%;object-fit:cover;filter:saturate(.85);transition:transform .5s,filter .4s}
+.ct-img:hover img{transform:scale(1.04);filter:saturate(1)}
+.ct-img::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to right,transparent 40%,rgba(124,58,237,.35) 100%);
+}
+.ct-tiles{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+.ct-tile{
+  background:var(--lbg);border:1px solid var(--br);border-radius:12px;
+  padding:1.3rem;
+  transition:border-color .25s,box-shadow .25s,transform .25s;
+}
+.ct-tile:hover{border-color:var(--brp);box-shadow:var(--s1);transform:translateY(-2px)}
+.ct-ico{font-size:1.35rem;margin-bottom:.45rem}
+.ct-lbl{font-size:.67rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mt);margin-bottom:.18rem}
+.ct-val{font-size:.84rem;font-weight:600;color:var(--dk)}
+
+/* Form */
+.cf-box{
+  background:var(--wh);border:1.5px solid var(--br);border-radius:18px;
+  padding:3rem;box-shadow:var(--s2);position:relative;overflow:hidden;
+}
+.cf-box::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--pu),var(--tl))}
+.cf-title{font-family:var(--sans);font-size:1.55rem;font-weight:800;color:var(--dk);margin-bottom:.25rem}
+.cf-sub{font-size:.84rem;color:var(--mt);margin-bottom:1.8rem}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.fg{margin-bottom:1rem}
+label{display:block;font-size:.7rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--mt);margin-bottom:.38rem}
+input,select,textarea{
+  width:100%;background:var(--off);border:1.5px solid var(--br);border-radius:7px;
+  padding:.78rem 1rem;font-family:var(--body);font-size:.88rem;color:var(--dk);
+  outline:none;appearance:none;
+  transition:border-color .25s,background .25s,box-shadow .25s;
+}
+input::placeholder,textarea::placeholder{color:#c4c9d0}
+input:focus,select:focus,textarea:focus{
+  border-color:var(--pu);background:var(--pu-badge);
+  box-shadow:0 0 0 3px rgba(124,58,237,.08);
+}
+select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237c3aed' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right .9rem center;cursor:pointer;
+}
+select option{background:#fff}
+textarea{resize:vertical;min-height:105px}
+.cf-btn{
+  width:100%;background:var(--pu);color:#fff;
+  padding:.95rem 2rem;font-family:var(--sans);font-size:.92rem;font-weight:700;
+  letter-spacing:.04em;border:2px solid var(--pu);cursor:pointer;border-radius:8px;
+  margin-top:.4rem;display:flex;align-items:center;justify-content:center;gap:.5rem;
+  transition:background .25s,transform .22s,box-shadow .25s,border-color .25s;
+  box-shadow:0 4px 16px rgba(124,58,237,.3);position:relative;overflow:hidden;
+}
+.cf-btn::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.1);transform:translateX(-100%);transition:transform .4s ease}
+.cf-btn:hover{background:var(--pu-d);border-color:var(--pu-d);transform:translateY(-2px);box-shadow:0 8px 28px rgba(124,58,237,.42)}
+.cf-btn:hover::before{transform:translateX(0)}
+.cf-ok{display:none;text-align:center;padding:2.5rem 1rem}
+.cf-ok.show{display:block}
+.cf-ok-ico{font-size:3.5rem;margin-bottom:1rem}
+.cf-ok h3{font-family:var(--sans);font-size:1.5rem;font-weight:800;color:var(--pu);margin-bottom:.4rem}
+.cf-ok p{font-size:.88rem;color:var(--mt)}
+
+/* ══ NEWSLETTER ══ */
+.nl-bar{
+  padding:3.5rem 5%;background:var(--pu-badge);
+  border-top:1px solid var(--pu-bb);border-bottom:1px solid var(--pu-bb);
+  display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;
+}
+.nl-bar h3{font-family:var(--sans);font-size:1.3rem;font-weight:800;color:var(--dk);margin-bottom:.2rem}
+.nl-bar p{font-size:.85rem;color:var(--mt)}
+.nl-form{display:flex;gap:.7rem}
+.nl-form input{width:280px;background:#fff}
+.nl-form button{
+  background:var(--pu);color:#fff;padding:0 1.8rem;
+  border:2px solid var(--pu);cursor:pointer;border-radius:7px;
+  font-family:var(--sans);font-weight:700;font-size:.84rem;white-space:nowrap;
+  transition:background .25s,box-shadow .25s,transform .2s;
+  box-shadow:0 4px 14px rgba(124,58,237,.25);
+}
+.nl-form button:hover{background:var(--pu-d);box-shadow:0 7px 22px rgba(124,58,237,.38);transform:translateY(-1px)}
+
+/* ══ FOOTER ══ */
+footer{background:var(--dk);padding:5.5rem 5% 2.5rem}
+.ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem;margin-bottom:4rem}
+.ft-brand p{font-size:.84rem;color:rgba(255,255,255,.38);line-height:1.78;margin-top:.9rem;max-width:270px}
+.ft-brand .brand{font-family:var(--sans);font-size:1.2rem;font-weight:900;color:#fff}
+.ft-brand .brand span{color:var(--pu-m)}
+.ft-col h4{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:1.4rem}
+.ft-links{list-style:none}
+.ft-links li{margin-bottom:.6rem}
+.ft-links a{font-size:.83rem;color:rgba(255,255,255,.45);transition:color .2s,padding-left .2s}
+.ft-links a:hover{color:var(--pu-m);padding-left:4px}
+.ft-bottom{
+  padding-top:2rem;border-top:1px solid rgba(255,255,255,.07);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;
+}
+.ft-bottom p{font-size:.78rem;color:rgba(255,255,255,.28)}
+.ft-bottom a{color:var(--pu-m)}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:1100px){
+  .bento .bc-5{grid-column:span 6}
+  .bento .bc-4{grid-column:span 6}
+  .bento .bc-3{grid-column:span 6}
+  .bento .bc-7{grid-column:span 12}
+  .bento .bc-8{grid-column:span 12}
+  .why-grid{grid-template-columns:repeat(2,1fr)}
+  .pkg-grid{grid-template-columns:repeat(2,1fr)}
+  .ft-grid{grid-template-columns:1fr 1fr;gap:2.5rem}
+  .sol-row{grid-template-columns:60px 1fr 1fr auto}
+}
+@media(max-width:900px){
+  #hero{grid-template-columns:1fr;text-align:center;padding:8rem 5% 4rem}
+  .hero-right{display:none}
+  .hero-ctas,.hero-stats{justify-content:center}
+  .hero-stats{flex-wrap:wrap}
+  #livechat{grid-template-columns:1fr}
+  .lc-visual{min-height:320px}
+  .lc-text{padding:3.5rem 5%}
+  .eff-grid{grid-template-columns:1fr;gap:4rem}
+  .eff-stat-card{right:0;bottom:-20px}
+  .ct-grid{grid-template-columns:1fr;gap:3.5rem}
+  .t-grid{grid-template-columns:1fr 1fr}
+  nav .navlinks{display:none}
+  .burger{display:flex}
+  nav{padding:0 1.5rem}
+  .com-inner{grid-template-columns:1fr;gap:2.5rem}
+  .blog-card{grid-template-columns:1fr}
+  .blog-img{min-height:220px}
+  .sol-row{grid-template-columns:50px 1fr auto}
+  .sol-cell.sol-desc-cell{display:none}
+}
+@media(max-width:600px){
+  #hero h1{font-size:2.4rem}
+  .t-grid{grid-template-columns:1fr}
+  .pkg-grid{grid-template-columns:1fr}
+  .bento .bc-5,.bento .bc-4,.bento .bc-3,.bento .bc-6,.bento .bc-7,.bento .bc-8,.bento .bc-full{grid-column:1/-1}
+  .frow,.ct-tiles,.nl-form{flex-direction:column}
+  .nl-form input{width:100%}
+  .ft-grid{grid-template-columns:1fr;gap:2rem}
+  .hero-ctas{flex-direction:column;align-items:center}
+}
+</style>
+</head>
+<body>
+
+<div class="loader" id="loader"><span>The PatchWork™</span></div>
+<button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- MOBILE MENU -->
+<div class="mmenu" id="mm">
+  <button class="mclose" onclick="closeMM()">✕</button>
+  <a href="#" onclick="closeMM()">Home</a>
+  <a href="#services" onclick="closeMM()">Services</a>
+  <a href="#packages" onclick="closeMM()">Pricing</a>
+  <a href="#blog" onclick="closeMM()">Blog</a>
+  <a href="#contact" onclick="closeMM()">Contact</a>
+  <a href="#contact" class="btn btn-pu" onclick="closeMM()" style="margin-top:.5rem">Start Now</a>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="logo">
+    <div class="logo-icon">P</div>
+    <div class="logo-text"><span class="the">the</span><span class="brand">Patch<span>Work</span>™</span></div>
+  </a>
+  <ul class="navlinks">
+    <li><a href="#" class="act">Home +</a></li>
+    <li><a href="#livechat">About</a></li>
+    <li><a href="#services">Services +</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact" class="nav-btn">Start Now</a></li>
+  </ul>
+  <div class="burger" id="burger" onclick="openMM()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="hero-blob"></div>
+  <div class="hero-blob2"></div>
+  <div class="hero-left">
+    <div class="hero-badge">🎨 Seamless Business Solutions</div>
+    <h1 class="hero-h1">Professional <em>Support</em> for<br>Your Business Growth</h1>
+    <p class="hero-p">At The PatchWork™, we make it easier for businesses to thrive. With our all-in-one services, you're never alone in your journey. Don't do it alone—partner with us.</p>
+    <div class="hero-ctas">
+      <a href="#livechat" class="btn btn-pu">Learn More</a>
+      <a href="#services" class="btn btn-out">Explore Services</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">3K+</div>
+        <div class="hero-stat-label">Businesses Served</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">50+</div>
+        <div class="hero-stat-label">Countries Reached</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">24/7</div>
+        <div class="hero-stat-label">Live Support</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-main">
+      <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900&q=80&fit=crop" alt="Team collaboration">
+    </div>
+    <div class="hero-img-s">
+      <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=500&q=75&fit=crop" alt="Design work">
+    </div>
+    <div class="hero-img-s">
+      <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=500&q=75&fit=crop" alt="Web development">
+    </div>
+    <div class="hero-float-card">
+      <div class="hfc-icon">⚡</div>
+      <div>
+        <div class="hfc-label">Efficiency Boost</div>
+        <div class="hfc-val">90% Improved</div>
+      </div>
+    </div>
+    <div class="hero-float-card2">
+      <div class="hfc2-val">1M+</div>
+      <div class="hfc2-label">Businesses Trust Us</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="mbar">
+  <div class="mtrack">
+    <span class="mi"><span class="ms">◆</span>Graphic Design</span>
+    <span class="mi"><span class="ms">◆</span>Copywriting</span>
+    <span class="mi"><span class="ms">◆</span>SEO Services</span>
+    <span class="mi"><span class="ms">◆</span>Virtual Assistance</span>
+    <span class="mi"><span class="ms">◆</span>App Development</span>
+    <span class="mi"><span class="ms">◆</span>Social Media Management</span>
+    <span class="mi"><span class="ms">◆</span>Data Entry</span>
+    <span class="mi"><span class="ms">◆</span>Web Development</span>
+    <span class="mi"><span class="ms">◆</span>Email Marketing</span>
+    <span class="mi"><span class="ms">◆</span>Video Production</span>
+    <span class="mi"><span class="ms">◆</span>Cyber Security</span>
+    <span class="mi"><span class="ms">◆</span>Graphic Design</span>
+    <span class="mi"><span class="ms">◆</span>Copywriting</span>
+    <span class="mi"><span class="ms">◆</span>SEO Services</span>
+    <span class="mi"><span class="ms">◆</span>Virtual Assistance</span>
+    <span class="mi"><span class="ms">◆</span>App Development</span>
+    <span class="mi"><span class="ms">◆</span>Social Media Management</span>
+    <span class="mi"><span class="ms">◆</span>Data Entry</span>
+    <span class="mi"><span class="ms">◆</span>Web Development</span>
+    <span class="mi"><span class="ms">◆</span>Email Marketing</span>
+    <span class="mi"><span class="ms">◆</span>Video Production</span>
+    <span class="mi"><span class="ms">◆</span>Cyber Security</span>
+  </div>
+</div>
+
+<!-- ═══ SERVICES — BENTO GRID ═══ -->
+<section id="services">
+  <div class="svc-intro rv">
+    <div class="svc-intro-left">
+      <div class="chip inv">Our Expertise</div>
+      <h2 class="stitle light">Explore the Range of <span>Services We Offer</span></h2>
+    </div>
+    <a href="#contact" class="btn btn-out" style="color:var(--pu-m);border-color:var(--pu-m)">Get Started</a>
+    <div class="svc-count">14</div>
+  </div>
+
+  <div class="bento">
+
+    <!-- ROW 1: large image card + 2 text cards -->
+    <div class="bc bc-5 bc-r4 rv rvl">
+      <div class="bc-img" style="height:100%">
+        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=700&q=75&fit=crop" alt="Graphic Design" loading="lazy">
+        <div class="bc-img-overlay"></div>
+      </div>
+      <div class="bc-over">
+        <div class="bc-ico">🎨</div>
+        <div class="bc-name">Graphic Design</div>
+        <div class="bc-desc">Bring your brand to life with visually stunning designs. From logos to marketing materials, we ensure your brand gets noticed.</div>
+        <a href="#contact" class="bc-link">Learn more →</a>
+      </div>
+      <div class="bc-num">01</div>
+    </div>
+
+    <div class="bc bc-4 bc-r2 bc-pu rv d1">
+      <div class="bc-txt">
+        <div>
+          <div class="bc-ico">✍️</div>
+          <div class="bc-name">Copywriting</div>
+          <div class="bc-desc">Words that work. We craft copy that captivates, persuades, and drives action—inspiring your audience to act.</div>
+        </div>
+        <a href="#contact" class="bc-link">Learn more →</a>
+      </div>
+      <div class="bc-num">02</div>
+    </div>
+
+    <div class="bc bc-3 bc-r2 rv d2">
+      <div class="bc-txt">
+        <div>
+          <div class="bc-ico">🔍</div>
+          <div class="bc-name">SEO Services</div>
+          <div class="bc-desc">Stop getting lost. Boost visibility, drive organic traffic, and own Google's page 1.</div>
+        </div>
+        <a href="#contact" class="bc-link">Learn more →</a>
+      </div>
+      <div class="bc-num">03</div>
+    </div>
+
+    <div class="bc bc-4 bc-r2 rv d2" style="background:#130d2e">
+      <div class="bc-img" style="height:100%">
+        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=75&fit=crop" alt="Virtual Assistance" loading="lazy">
+        <div class="bc-img-overlay"></div>
+      </div>
+      <div class="bc-over">
+        <div class="bc-ico">🤝</div>
+        <div class="bc-name">Virtual Assistance</div>
+        <div class="bc-desc">Your tasks handled, your focus restored. We keep your business running smoothly behind the scenes.</div>
+        <a href="#contact" class="bc-link">Learn more →</a>
+      </div>
+      <div class="bc-num">04</div>
+    </div>
+
+    <div class="bc bc-3 bc-r2 bc-tl rv d3">
+      <div class="bc-txt">
+        <div>
+          <div class="bc-ico">📱</div>
+          <div class="bc-name">App Development</div>
+          <div class="bc-desc">iOS or Android — we build intuitive apps that users love.</div>
+        </div>
+        <a href="#contact" class="bc-link">Learn more →</a>
+      </div>
+      <div class="bc-num">05</div>
+    </div>
+
+    <!-- ROW 2: wide image + 2 tall -->
+    <div class="bc bc-8 bc-wide rv">
+      <div class="bc-img">
+        <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=900&q=75&fit=crop" alt="Social Media Management" loading="lazy">
+        <div class="bc-img-overlay"></div>
+      </div>
+      <div class="bc-over">
+        <div class="bc-ico">📣</div>
+        <div class="bc-name">Social Media Management</div>
+        <div class="bc-desc">We turn likes into leads. Amplify your brand across every channel that matters.</div>
+        <a href="#contact" class="bc-link">Learn more →</a>
+      </div>
+      <div class="bc-num">06</div>
+    </div>
+
+    <div class="bc bc-4 rv d1">
+      <div class="bc-txt">
+        <div>
+          <div class="bc-ico">📊</div>
+          <div class="bc-name">Data Entry</div>
+          <div class="bc-desc">Accurate, efficient data management so you can focus on growth.</div>
+        </div>
+        <a href="#contact" class="bc-link">Learn more →</a>
+      </div>
+      <div class="bc-num">07</div>
+    </div>
+
+    <!-- ROW 3 -->
+    <div class="bc bc-4 rv">
+      <div class="bc-txt">
+        <div>
+          <div class="bc-ico">📋</div>
+          <div class="bc-name">Business Planning</div>
+          <div class="bc-desc">Strategic roadmaps for long-term growth, backed by solid research and insights.</div>
+        </div>
+        <a href="#contact" class="bc-link">Learn more →</a>
+      </div>
+      <div class="bc-num">08</div>
+    </div>
+
+    <div class="bc bc-4 rv d1" style="background:#130d2e">
+      <div class="bc-img" style="height:100%">
+        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&q=75&fit=crop" alt="Cyber Security" loading="lazy">
+        <div class="bc-img-overlay"></div>
+      </div>
+      <div class="bc-over">
+        <div class="bc-ico">🔐</div>
+        <div class="bc-name">Cyber Security</div>
+        <div class="bc-desc">Sleep easy. Your data and digital presence fully protected.</div>
+        <a href="#contact" class="bc-link">Learn more →</a>
+      </div>
+      <div class="bc-num">09</div>
+    </div>
+
+    <div class="bc bc-4 bc-pu rv d2">
+      <div class="bc-txt">
+        <div>
+          <div class="bc-ico">🎓</div>
+          <div class="bc-name">Online Courses</div>
+          <div class="bc-desc">Share your expertise. We build engaging courses learners love.</div>
+        </div>
+        <a href="#contact" class="bc-link">Learn more →</a>
+      </div>
+      <div class="bc-num">10</div>
+    </div>
+
+    <!-- ROW 4 -->
+    <div class="bc bc-5 rv">
+      <div class="bc-img" style="height:100%">
+        <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=700&q=75&fit=crop" alt="Web Development" loading="lazy">
+        <div class="bc-img-overlay"></div>
+      </div>
+      <div class="bc-over">
+        <div class="bc-ico">💻</div>
+        <div class="bc-name">Web Development</div>
+        <div class="bc-desc">Stunning, responsive websites built for the future—from e-commerce to custom platforms.</div>
+        <a href="#contact" class="bc-link">Learn more →</a>
+      </div>
+      <div class="bc-num">11</div>
+    </div>
+
+    <div class="bc bc-3 rv d1">
+      <div class="bc-txt">
+        <div>
+          <div class="bc-ico">📧</div>
+          <div class="bc-name">Email Marketing</div>
+          <div class="bc-desc">Targeted campaigns that nurture leads and drive real conversions.</div>
+        </div>
+        <a href="#contact" class="bc-link">Learn more →</a>
+      </div>
+      <div class="bc-num">12</div>
+    </div>
+
+    <div class="bc bc-4 bc-tl rv d2">
+      <div class="bc-txt">
+        <div>
+          <div class="bc-ico">🎬</div>
+          <div class="bc-name">Video Production</div>
+          <div class="bc-desc">High-quality videos that bring your brand story to life and leave lasting impressions.</div>
+        </div>
+        <a href="#contact" class="bc-link">Learn more →</a>
+      </div>
+      <div class="bc-num">13</div>
+    </div>
+
+    <div class="bc bc-full rv d3" style="grid-row:span 2">
+      <div class="bc-img" style="height:160px">
+        <img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=1400&q=75&fit=crop" alt="Email and Calendar Management" loading="lazy">
+        <div class="bc-img-overlay"></div>
+      </div>
+      <div class="bc-over">
+        <div class="bc-ico">🗓️</div>
+        <div class="bc-name">Email and Calendar Management</div>
+        <div class="bc-desc">Stay on top of your inbox and schedule. Professional management designed to keep you organized and stress-free, every single day.</div>
+        <a href="#contact" class="bc-link">Learn more →</a>
+      </div>
+      <div class="bc-num">14</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ LIVE CHAT ═══ -->
+<section id="livechat" style="display:block;padding:0">
+  <div style="display:grid;grid-template-columns:1fr 1fr;min-height:600px">
+    <div class="lc-visual rvl" id="lcv">
+      <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&q=80&fit=crop" alt="Support team" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.35">
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,26,46,.95) 0%,rgba(76,29,149,.85) 100%)"></div>
+      <div class="lc-visual-content">
+        <div class="lc-label">Live Chat Support</div>
+        <div class="chat-wrap">
+          <div class="chat-b agent">Hi there! How can The PatchWork™ help your business today?</div>
+          <div class="chat-b user">I need help growing my online presence.</div>
+          <div class="chat-b agent agent2">We've got you covered — from SEO to social media and web design. Let's get started!</div>
+        </div>
+        <div class="lc-avail"><div class="gdot"></div>24/7 availability for global audiences</div>
+      </div>
+    </div>
+    <div class="lc-text rvr">
+      <div class="chip">Your Dedicated Support Team</div>
+      <h2 class="stitle">Boost lead generation and <span>customer engagement.</span></h2>
+      <p>At The PatchWork™, we provide 24/7 live chat support to ensure your business can engage with potential customers in real-time, helping you capture more leads and drive growth. Don't do it alone—our team is here to assist.</p>
+      <ul class="check-list">
+        <li>Real-time customer assistance</li>
+        <li>Boost engagement and conversions</li>
+        <li>24/7 availability for global audiences</li>
+      </ul>
+      <div class="btn-row">
+        <a href="#" class="btn btn-pu">Learn more</a>
+        <a href="#contact" class="cta-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Chat with us now
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHY CHOOSE US ═══ -->
+<section id="why">
+  <div class="why-bg-text">THE PATCHWORK™</div>
+  <div class="why-header rv">
+    <div class="chip inv">Why Choose Us</div>
+    <h2 class="stitle light" style="margin:.5rem auto 0;max-width:580px">Discover why <span>1M+ businesses</span> trust The PatchWork™.</h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-item rv"><span class="why-big">M</span><div class="why-title">Businesses</div><p class="why-desc">rely on The PatchWork™ to grow and scale globally.</p></div>
+    <div class="why-item rv d1"><span class="why-big">M+</span><div class="why-title">Projects Completed</div><p class="why-desc">through The PatchWork™'s professional services.</p></div>
+    <div class="why-item rv d2"><span class="why-big">+</span><div class="why-title">Countries</div><p class="why-desc">benefit from The PatchWork™'s global reach.</p></div>
+    <div class="why-item rv d3"><span class="why-big">#1</span><div class="why-title">Service Provider</div><p class="why-desc">The PatchWork™ leads in comprehensive business solutions.</p></div>
+  </div>
+</section>
+
+<!-- ═══ EFFICIENCY ═══ -->
+<section id="efficiency" style="padding:7rem 5%;background:var(--lbg)">
+  <div class="eff-grid">
+    <div class="rvl">
+      <div class="eff-img-stack">
+        <div class="eff-img-main">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&fit=crop" alt="Analytics dashboard" loading="lazy">
+        </div>
+        <div class="eff-stat-card">
+          <div class="eff-pct">90%</div>
+          <div class="eff-pct-lbl">Efficiency Improvement</div>
+          <div class="eff-mini-bars">
+            <div class="eff-mini-bar"><div class="eff-mini-fill" style="width:95%"></div></div>
+            <div class="eff-mini-bar"><div class="eff-mini-fill" style="width:90%;animation-delay:.25s"></div></div>
+            <div class="eff-mini-bar"><div class="eff-mini-fill" style="width:88%;animation-delay:.5s"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="eff-text rvr">
+      <div class="chip">Accelerate Your Business Growth</div>
+      <h2 class="stitle">Boost your potential with a <span>90% improvement in efficiency</span></h2>
+      <p>At The PatchWork™, we provide comprehensive solutions that help businesses scale efficiently. From web development to virtual assistance, we've got you covered. Let us help you unlock your full potential.</p>
+      <ul class="eff-list">
+        <li>Custom web and app development for seamless operations</li>
+        <li>Professional branding and graphic design services</li>
+        <li>Virtual assistance and administrative support</li>
+      </ul>
+      <div class="btn-row">
+        <a href="#" class="btn btn-pu">Learn more</a>
+        <a href="#contact" class="cta-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Chat with us now
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TRUSTED ═══ -->
+<section id="trusted">
+  <div class="trusted-head rv">
+    <div class="chip">Trusted by Businesses Worldwide</div>
+    <h2 class="stitle">Over 3000+ businesses &amp; online stores rely on <span>The PatchWork™</span></h2>
+  </div>
+  <div class="clients-row rv d2">
+    <div class="client-box">Client</div>
+    <div class="client-box">Client</div>
+    <div class="client-box">Client</div>
+    <div class="client-box">Client</div>
+    <div class="client-box">Client</div>
+    <div class="client-box">Client</div>
+  </div>
+</section>
+
+<!-- ═══ BUSINESS SOLUTIONS — table rows ═══ -->
+<section id="solutions">
+  <div class="sol-header rv">
+    <div class="chip">Business Solutions</div>
+    <h2 class="stitle">Elevate your business with <span>The PatchWork™ expertise</span></h2>
+  </div>
+  <div class="sol-rows">
+    <div class="sol-row rv">
+      <div class="sol-cell sol-idx">01</div>
+      <div class="sol-cell sol-name-cell">
+        <div class="sol-name">Custom Web Development Services</div>
+        <div class="sol-tags"><span class="sol-tag">Web</span><span class="sol-tag">E-commerce</span></div>
+      </div>
+      <div class="sol-cell sol-desc-cell"><p class="sol-desc">Build responsive, SEO-optimized websites that help your business scale efficiently across all devices. Our expert team delivers high-quality, custom solutions.</p></div>
+      <div class="sol-cell sol-arrow">→</div>
+    </div>
+    <div class="sol-row rv d1">
+      <div class="sol-cell sol-idx">02</div>
+      <div class="sol-cell sol-name-cell">
+        <div class="sol-name">Professional Graphic Design &amp; Branding</div>
+        <div class="sol-tags"><span class="sol-tag">Design</span><span class="sol-tag">Branding</span></div>
+      </div>
+      <div class="sol-cell sol-desc-cell"><p class="sol-desc">From logos to banners, we create visually stunning designs that strengthen your brand's identity and captivate your audience. Stand out in a competitive market.</p></div>
+      <div class="sol-cell sol-arrow">→</div>
+    </div>
+    <div class="sol-row rv d2">
+      <div class="sol-cell sol-idx">03</div>
+      <div class="sol-cell sol-name-cell">
+        <div class="sol-name">Virtual Assistance &amp; Administrative Support</div>
+        <div class="sol-tags"><span class="sol-tag">VA</span><span class="sol-tag">Admin</span></div>
+      </div>
+      <div class="sol-cell sol-desc-cell"><p class="sol-desc">Our team of skilled virtual assistants handles your administrative tasks, from email management to scheduling, so you can focus on growing your business.</p></div>
+      <div class="sol-cell sol-arrow">→</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<section id="testimonials">
+  <div class="t-header rv">
+    <div class="chip">Success Stories</div>
+    <h2 class="stitle">What Our Clients Say About <span>The PatchWork™</span></h2>
+  </div>
+  <div class="t-grid">
+    <div class="t-card featured rv">
+      <div class="t-stars">★★★★★</div>
+      <div class="t-qmark">"</div>
+      <p class="t-txt">The PatchWork™ transformed our online presence with their exceptional web design services. Their attention to detail and customer service are second to none. Highly recommend!</p>
+      <div class="t-auth"><div class="t-av">J</div><div><div class="t-name" style="color:#fff">Jessica M. Smith</div><div class="t-role">Marketing Director</div></div></div>
+    </div>
+    <div class="t-card rv d1">
+      <div class="t-stars">★★★★★</div>
+      <div class="t-qmark">"</div>
+      <p class="t-txt">Working with The PatchWork™ was a game-changer for our e-commerce site. Their innovative approach and dedication resulted in a significant increase in our online sales.</p>
+      <div class="t-auth"><div class="t-av">M</div><div><div class="t-name">Michael T. Davis</div><div class="t-role">CEO</div></div></div>
+    </div>
+    <div class="t-card rv d2">
+      <div class="t-stars">★★★★★</div>
+      <div class="t-qmark">"</div>
+      <p class="t-txt">The PatchWork™ provided outstanding support during our website redesign project. Their expertise and professionalism exceeded our expectations.</p>
+      <div class="t-auth"><div class="t-av">E</div><div><div class="t-name">Emily R. Johnson</div><div class="t-role">Product Manager</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PACKAGES ═══ -->
+<section id="packages">
+  <div class="pkg-header rv">
+    <div class="chip">GET A QUOTE</div>
+    <h2 class="stitle">Get a customized <span>quote today</span></h2>
+  </div>
+  <div class="pkg-grid">
+    <div class="pkg-card rv">
+      <div class="pkg-name">Starter Package</div>
+      <div class="pkg-ideal">Ideal for small businesses</div>
+      <ul class="pkg-feats"><li>Custom web development solutions</li><li>Professional graphic design &amp; branding</li><li>Social media management</li><li>Email support</li><li>And more tailored to your needs</li></ul>
+      <a href="#contact" class="btn btn-out pkg-btn">Get Your Quote</a>
+    </div>
+    <div class="pkg-card star rv d1">
+      <div class="pkg-name">Professional Package</div>
+      <div class="pkg-ideal">Perfect for growing businesses</div>
+      <ul class="pkg-feats"><li>Comprehensive web and app development</li><li>Advanced digital marketing strategies</li><li>SEO optimization &amp; management</li><li>24/7 support</li><li>Tailored to your specific goals</li></ul>
+      <a href="#contact" class="btn btn-pu pkg-btn">Get Your Quote</a>
+    </div>
+    <div class="pkg-card rv d2">
+      <div class="pkg-name">Enterprise Package</div>
+      <div class="pkg-ideal">Best for large enterprises</div>
+      <ul class="pkg-feats"><li>Complete business solutions</li><li>Custom app and software development</li><li>Advanced security features</li><li>Dedicated support team</li><li>Tailored to meet your corporate needs</li></ul>
+      <a href="#contact" class="btn btn-out pkg-btn">Get Your Quote</a>
+    </div>
+    <div class="pkg-card rv d3">
+      <div class="pkg-name">Custom Package</div>
+      <div class="pkg-ideal">Fully customizable to suit any business</div>
+      <ul class="pkg-feats"><li>Build your own package</li><li>Includes all services you need</li><li>Flexible pricing based on your scope</li><li>24/7 support included</li><li>Get started today!</li></ul>
+      <a href="#contact" class="btn btn-out pkg-btn">Get Your Quote</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ COMMUNITY ═══ -->
+<section id="community">
+  <img class="com-bg" src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1400&q=80&fit=crop" alt="Growing community" loading="lazy">
+  <div class="com-overlay"></div>
+  <div class="com-grid-lines"></div>
+  <div class="com-inner">
+    <div class="com-left rv">
+      <div class="chip inv">JOIN OUR NETWORK</div>
+      <h2 class="stitle light">Connect beyond borders, become a part of our <span>Growing Community</span></h2>
+      <ul class="com-bullets">
+        <li>Exclusive access to business resources</li>
+        <li>Stay updated with industry trends</li>
+      </ul>
+      <a href="#contact" class="btn btn-wh">Get Started</a>
+    </div>
+    <div class="com-right rv d2">
+      <div class="com-box">
+        <div class="com-box-ico">🌐</div>
+        <div><div class="com-box-title">Global Network</div><div class="com-box-sub">Connect with businesses in 50+ countries</div></div>
+      </div>
+      <div class="com-box">
+        <div class="com-box-ico">📚</div>
+        <div><div class="com-box-title">Exclusive Resources</div><div class="com-box-sub">Premium guides, templates &amp; tools</div></div>
+      </div>
+      <div class="com-box">
+        <div class="com-box-ico">📈</div>
+        <div><div class="com-box-title">Industry Insights</div><div class="com-box-sub">Stay ahead with the latest trends</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BLOG ═══ -->
+<section id="blog">
+  <div class="blog-header rv">
+    <div class="chip">Our Blog</div>
+    <h2 class="stitle">Read our <span>latest blogs</span></h2>
+  </div>
+  <div class="blog-card rv d1">
+    <div class="blog-img">
+      <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&q=80&fit=crop" alt="Blog post" loading="lazy">
+    </div>
+    <div class="blog-body">
+      <div class="blog-meta"><span>Team Unstoppable</span><span>2 min read</span></div>
+      <div class="blog-title">Master Your Business: The Power of Streamlined Web Development</div>
+      <a href="https://www.i-patchwork.com/blog/master-your-business-the-power-of-streamlined-web/" class="blog-lnk">Read more →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section id="contact" style="padding:7rem 5%;background:var(--wh)">
+  <div class="ct-grid">
+    <div class="rvl">
+      <div class="chip">Contact Us</div>
+      <h2 class="stitle">Get in <span>Touch</span></h2>
+      <p class="ssub">Ready to grow your business? Reach out and our team will get back to you within 24 hours.</p>
+      <div class="ct-img">
+        <img src="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=700&q=75&fit=crop" alt="Contact" loading="lazy">
+      </div>
+      <div class="ct-tiles">
+        <div class="ct-tile"><div class="ct-ico">🌐</div><div class="ct-lbl">Website</div><div class="ct-val">i-patchwork.com</div></div>
+        <div class="ct-tile"><div class="ct-ico">💬</div><div class="ct-lbl">Live Chat</div><div class="ct-val">24/7 Available</div></div>
+        <div class="ct-tile"><div class="ct-ico">📍</div><div class="ct-lbl">Global Reach</div><div class="ct-val">50+ Countries</div></div>
+        <div class="ct-tile"><div class="ct-ico">⚡</div><div class="ct-lbl">Response Time</div><div class="ct-val">Within 24 hours</div></div>
+      </div>
+    </div>
+    <div class="rvr">
+      <div class="cf-box">
+        <div id="cf-body">
+          <div class="cf-title">Get a Free Quote</div>
+          <div class="cf-sub">Fill in the form and we'll get back to you within 24 hours.</div>
+          <form id="cform" novalidate>
+            <div class="frow">
+              <div class="fg"><label for="fn">First Name *</label><input type="text" id="fn" placeholder="John" required></div>
+              <div class="fg"><label for="ln">Last Name *</label><input type="text" id="ln" placeholder="Smith" required></div>
+            </div>
+            <div class="fg"><label for="em">Email Address *</label><input type="email" id="em" placeholder="john@company.com" required></div>
+            <div class="fg"><label for="co">Company Name</label><input type="text" id="co" placeholder="Your Company"></div>
+            <div class="fg">
+              <label for="sv">Service *</label>
+              <select id="sv" required>
+                <option value="" disabled selected>Select a service...</option>
+                <option>Graphic Design</option><option>Copywriting</option>
+                <option>SEO Services</option><option>Virtual Assistance</option>
+                <option>App Development</option><option>Social Media Management</option>
+                <option>Data Entry</option><option>Business Planning</option>
+                <option>Cyber Security</option><option>Online Courses</option>
+                <option>Web Development</option><option>Email Marketing</option>
+                <option>Video Production</option><option>Email and Calendar Management</option>
+                <option>Custom Package</option>
+              </select>
+            </div>
+            <div class="fg"><label for="msg">Message *</label><textarea id="msg" placeholder="Tell us about your project..." required></textarea></div>
+            <button type="submit" class="cf-btn">Send Message →</button>
+          </form>
+        </div>
+        <div class="cf-ok" id="cf-ok">
+          <div class="cf-ok-ico">✅</div>
+          <h3>Message Sent!</h3>
+          <p>Thank you for reaching out. Our team will be in touch within 24 hours.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<div class="nl-bar">
+  <div>
+    <h3>Newsletter</h3>
+    <p>Stay updated with our latest insights, business tips, and exclusive offers. Subscribe and never miss a beat!</p>
+  </div>
+  <div class="nl-form">
+    <input type="email" id="nl-email" placeholder="Your email address">
+    <button id="nl-btn">Subscribe</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-grid">
+    <div class="ft-brand">
+      <div class="brand">Patch<span>Work</span>™</div>
+      <p>At The PatchWork™, we make it easier for businesses to thrive. With our all-in-one services, you're never alone in your journey.</p>
+    </div>
+    <div class="ft-col">
+      <h4>Services</h4>
+      <ul class="ft-links">
+        <li><a href="#services">Graphic Design</a></li><li><a href="#services">Copywriting</a></li>
+        <li><a href="#services">SEO Services</a></li><li><a href="#services">Virtual Assistance</a></li>
+        <li><a href="#services">App Development</a></li><li><a href="#services">Social Media</a></li>
+        <li><a href="#services">Data Entry</a></li><li><a href="#services">Business Planning</a></li>
+        <li><a href="#services">Cyber Security</a></li><li><a href="#services">Online Courses</a></li>
+        <li><a href="#services">Web Development</a></li><li><a href="#services">Email Marketing</a></li>
+        <li><a href="#services">Video Production</a></li><li><a href="#services">Calendar Management</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h4>Resources</h4>
+      <ul class="ft-links"><li><a href="#blog">Blog</a></li></ul>
+    </div>
+    <div class="ft-col">
+      <h4>About Us</h4>
+      <ul class="ft-links">
+        <li><a href="https://www.i-patchwork.com/about/#our-story">Our Story</a></li>
+        <li><a href="https://www.i-patchwork.com/about/#success-story">Testimonial</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <p>© 2024 <a href="https://www.i-patchwork.com/">The PatchWork™.</a> All rights reserved.</p>
+    <p>Privacy Policy · Terms of Service</p>
+  </div>
+</footer>
+
+<script>
+// Loader
+window.addEventListener('load',()=>setTimeout(()=>document.getElementById('loader').classList.add('done'),500));
+
+// Nav + BTT
+const nav=document.getElementById('nav'),btt=document.getElementById('btt');
+window.addEventListener('scroll',()=>{
+  nav.classList.toggle('scrolled',scrollY>50);
+  btt.classList.toggle('show',scrollY>400);
+},{passive:true});
+
+// Mobile menu
+const burger=document.getElementById('burger');
+function openMM(){document.getElementById('mm').classList.add('open');burger.classList.add('open');document.body.style.overflow='hidden'}
+function closeMM(){document.getElementById('mm').classList.remove('open');burger.classList.remove('open');document.body.style.overflow=''}
+
+// Scroll reveal (all variants)
+const revEls=document.querySelectorAll('.rv,.rvl,.rvr,.rvs');
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('on');
+      // Trigger chat bubbles
+      if(e.target.id==='lcv')e.target.classList.add('on');
+      io.unobserve(e.target);
+    }
+  });
+},{threshold:.08,rootMargin:'0px 0px -25px 0px'});
+revEls.forEach(el=>io.observe(el));
+
+// Contact form
+document.getElementById('cform').addEventListener('submit',function(e){
+  e.preventDefault();
+  const req=['fn','ln','em','sv','msg'];let ok=true;
+  req.forEach(id=>{const el=document.getElementById(id);if(!el.value.trim()){el.style.borderColor='#ef4444';ok=false}else el.style.borderColor=''});
+  if(!ok)return;
+  document.getElementById('cf-body').style.display='none';
+  document.getElementById('cf-ok').classList.add('show');
+});
+document.querySelectorAll('input,select,textarea').forEach(el=>el.addEventListener('input',()=>el.style.borderColor=''));
+
+// Newsletter
+document.getElementById('nl-btn').addEventListener('click',function(){
+  const inp=document.getElementById('nl-email');
+  if(inp.value.includes('@')){this.textContent='✓ Subscribed!';this.style.background='#6d28d9';inp.value='';inp.disabled=true;this.disabled=true}
+});
+</script>
+</body>
+</html>
