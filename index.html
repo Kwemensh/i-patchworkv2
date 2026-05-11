@@ -2,9 +2,24 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The PatchWork™ | Expert Web Development & Design Services</title>
-<meta name="description" content="Professional support for your business growth.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The PatchWork™ | Web Development, Design &amp; Virtual Business Services</title>
+<meta name="description" content="The PatchWork™ delivers web development, graphic design, SEO, virtual assistance, and 24/7 live chat support so your business can scale with one trusted partner.">
+<meta name="keywords" content="web development services, graphic design agency, SEO services, virtual assistant, business support, live chat support, digital marketing, app development">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#7c3aed">
+<link rel="canonical" href="https://www.i-patchwork.com/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.i-patchwork.com/">
+<meta property="og:title" content="The PatchWork™ | Web Development, Design &amp; Business Services">
+<meta property="og:description" content="All-in-one web development, design, SEO, and virtual support with 24/7 live chat—built to help your business grow.">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The PatchWork™ | Web Development &amp; Design Services">
+<meta name="twitter:description" content="Scale faster with expert web development, branding, SEO, and dedicated virtual support from The PatchWork™.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"The PatchWork","alternateName":"The PatchWork™","url":"https://www.i-patchwork.com/","description":"Web development, graphic design, SEO, virtual assistance, live chat support, and digital business services for growing teams worldwide."}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -20,14 +35,22 @@
   --tx:#374151; --tx2:#4b5563; --mt:#6b7280;
   --br:#e5e7eb; --brp:#ddd6fe;
   --sans:'Raleway',sans-serif; --body:'Inter',system-ui,sans-serif;
-  --r:10px;
+  --r:12px;
+  --pad-x:clamp(1rem,4.5vw,5%);
+  --section-y:clamp(3.5rem,8vw,7rem);
   --s1:0 2px 12px rgba(124,58,237,.09);
   --s2:0 8px 35px rgba(124,58,237,.14);
   --s3:0 20px 65px rgba(124,58,237,.2);
+  --content-max:72rem;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:var(--body);background:var(--wh);color:var(--tx);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .loader,.rv,.rvl,.rvr,.rvs,.mtrack,.chat-b,.eff-mini-fill{transition:none!important;animation:none!important}
+}
+body{font-family:var(--body);background:var(--wh);color:var(--tx);overflow-x:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+:focus-visible{outline:2px solid var(--pu);outline-offset:3px}
 a{text-decoration:none}
 img{display:block;max-width:100%;object-fit:cover}
 
@@ -47,8 +70,8 @@ img{display:block;max-width:100%;object-fit:cover}
 
 /* ══ BACK TO TOP ══ */
 .btt{
-  position:fixed;bottom:2rem;right:2rem;z-index:100;
-  width:46px;height:46px;border-radius:50%;
+  position:fixed;bottom:max(1rem,env(safe-area-inset-bottom));right:max(1rem,env(safe-area-inset-right));z-index:100;
+  width:48px;height:48px;border-radius:50%;
   background:var(--pu);color:#fff;border:none;cursor:pointer;
   font-size:1.1rem;box-shadow:0 4px 18px rgba(124,58,237,.4);
   opacity:0;transform:translateY(16px);pointer-events:none;
@@ -60,45 +83,95 @@ img{display:block;max-width:100%;object-fit:cover}
 
 /* ══ NAV ══ */
 nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;height:70px;padding:0 5%;
-  display:flex;align-items:center;justify-content:space-between;
+  position:fixed;top:0;left:0;right:0;width:100%;z-index:200;min-height:84px;
+  padding:0.45rem max(2rem,env(safe-area-inset-right)) 0.45rem max(2rem,env(safe-area-inset-left));
+  padding-top:max(0.45rem,env(safe-area-inset-top));
+  display:flex;align-items:center;justify-content:center;
   background:rgba(255,255,255,.96);backdrop-filter:blur(20px);
   border-bottom:1px solid var(--br);
   box-shadow:0 1px 14px rgba(0,0,0,.06);
-  transition:height .35s,box-shadow .35s;
+  transition:min-height .35s,box-shadow .35s,padding .35s;
 }
-nav.scrolled{height:58px;box-shadow:var(--s2)}
-.logo{display:flex;align-items:center;gap:.55rem;transition:opacity .2s}
+nav.scrolled{min-height:70px;padding-top:max(0.25rem,env(safe-area-inset-top));box-shadow:var(--s2)}
+.nav-inner{
+  display:flex;align-items:center;justify-content:center;
+  flex-wrap:wrap;
+  row-gap:0.75rem;
+  column-gap:clamp(2.75rem,8vw,6.75rem);
+  width:100%;max-width:none;
+}
+@media(min-width:1025px){
+  .nav-inner{
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+    column-gap:clamp(1rem,2.5vw,2.5rem);
+    row-gap:0;
+    flex-wrap:nowrap;
+    padding-inline:clamp(0.25rem,1.2vw,0.85rem);
+  }
+  .nav-cell--start{justify-self:start;align-self:center;padding-left:.15rem}
+  .nav-cell--mid{justify-self:center;grid-column:2;align-self:center}
+  .nav-cell--end{justify-self:end;align-self:center;padding-right:.15rem}
+}
+.logo{display:flex;align-items:center;gap:.55rem;transition:opacity .2s;flex-shrink:0}
 .logo:hover{opacity:.8}
 .logo-icon{
-  width:36px;height:36px;background:var(--pu);border-radius:9px;
+  width:38px;height:38px;border-radius:10px;
+  background:linear-gradient(135deg,#9333ea 0%,#7c3aed 42%,#5b21b6 72%,#0d9488 100%);
   display:flex;align-items:center;justify-content:center;
-  font-family:var(--sans);font-size:1rem;font-style:italic;font-weight:900;color:#fff;
+  font-family:var(--sans);font-size:1.05rem;font-style:italic;font-weight:900;color:#fff;
   transition:transform .3s,box-shadow .3s;
+  box-shadow:0 3px 14px rgba(124,58,237,.35),inset 0 1px 0 rgba(255,255,255,.22);
 }
-.logo:hover .logo-icon{transform:rotate(-8deg) scale(1.08);box-shadow:0 4px 16px rgba(124,58,237,.4)}
+.logo:hover .logo-icon{transform:rotate(-8deg) scale(1.08);box-shadow:0 6px 22px rgba(124,58,237,.45),inset 0 1px 0 rgba(255,255,255,.25)}
 .logo-text .the{display:block;font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mt)}
-.logo-text .brand{display:block;font-family:var(--sans);font-size:1.1rem;font-weight:900;color:var(--dk)}
-.logo-text .brand span{color:var(--pu)}
-.navlinks{display:flex;align-items:center;gap:1.8rem;list-style:none}
-.navlinks a{font-size:.86rem;font-weight:600;color:var(--tx2);position:relative;padding-bottom:2px;transition:color .2s}
+.logo-text .brand{display:block;font-family:var(--sans);font-size:1.12rem;font-weight:900;line-height:1.15}
+.logo-text .brand .logo-patch{color:var(--pu);text-shadow:0 0 24px rgba(124,58,237,.2)}
+.logo-text .brand .logo-work{color:var(--tl)}
+.logo-text .brand .logo-tm{font-size:.55em;font-weight:800;color:var(--mt);vertical-align:super;margin-left:.06em}
+.navlinks{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:0;list-style:none;margin:0;padding:0}
+.navlinks a{
+  font-size:.9rem;font-weight:600;color:var(--tx2);position:relative;
+  padding:.45rem clamp(1.1rem,2.4vw,2rem) 8px;
+  transition:color .2s;
+}
 .navlinks a::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--pu);transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.4,0,.2,1)}
 .navlinks a:hover{color:var(--pu)}
 .navlinks a:hover::after,.navlinks a.act::after{transform:scaleX(1)}
 .navlinks a.act{color:var(--pu)}
 .nav-btn{
-  background:var(--pu);color:#fff;padding:.58rem 1.5rem;border-radius:7px;
-  font-family:var(--sans);font-size:.84rem;font-weight:700;
+  display:inline-flex;align-items:center;justify-content:center;
+  background:var(--pu);color:#fff;border-radius:8px;
+  font-family:var(--sans);font-size:.86rem;font-weight:700;
   border:2px solid var(--pu);
+  padding:.52rem clamp(1.35rem,2.8vw,2.1rem);
   box-shadow:0 4px 14px rgba(124,58,237,.32);
   transition:background .25s,transform .2s,box-shadow .25s;
+  white-space:nowrap;
 }
 .nav-btn:hover{background:var(--pu-d);border-color:var(--pu-d);transform:translateY(-2px);box-shadow:0 7px 22px rgba(124,58,237,.42)}
-.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
-.burger span{width:22px;height:2px;background:var(--dk);border-radius:2px;transition:.3s;display:block}
-.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-.burger.open span:nth-child(2){opacity:0}
-.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.burger{
+  display:none;align-items:center;justify-content:center;cursor:pointer;
+  width:48px;height:48px;padding:0;border:1px solid var(--br);border-radius:10px;
+  background:var(--wh);color:var(--dk);
+  box-shadow:0 1px 3px rgba(0,0,0,.06);
+  transition:background .2s,border-color .2s,box-shadow .2s,color .2s;
+  -webkit-tap-highlight-color:transparent;flex-shrink:0;
+}
+.burger:hover{background:var(--off);border-color:var(--brp);color:var(--pu-d)}
+.burger-lines{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:6px;width:22px;height:18px;
+}
+.burger-bar{
+  display:block;width:22px;height:2.5px;border-radius:2px;background:currentColor;
+  transition:transform .32s ease,opacity .22s ease;
+  transform-origin:center;
+}
+.burger.open .burger-bar:nth-child(1){transform:translateY(8.5px) rotate(45deg)}
+.burger.open .burger-bar:nth-child(2){opacity:0;transform:scaleX(0)}
+.burger.open .burger-bar:nth-child(3){transform:translateY(-8.5px) rotate(-45deg)}
 
 /* ══ MOBILE MENU ══ */
 .mmenu{
@@ -108,12 +181,12 @@ nav.scrolled{height:58px;box-shadow:var(--s2)}
 .mmenu.open{display:flex}
 .mmenu a{font-family:var(--sans);font-size:1.9rem;font-weight:800;color:var(--dk);transition:color .2s}
 .mmenu a:hover{color:var(--pu)}
-.mclose{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;font-size:2rem;cursor:pointer;color:var(--tx)}
+.mclose{position:absolute;top:max(.75rem,env(safe-area-inset-top));right:max(.75rem,env(safe-area-inset-right));background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--tx);min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center;border-radius:8px}
 
 /* ══ BUTTONS ══ */
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:.45rem;
-  padding:.82rem 2rem;border-radius:7px;
+  padding:.85rem 1.75rem;border-radius:7px;min-height:44px;
   font-family:var(--sans);font-size:.875rem;font-weight:700;letter-spacing:.02em;
   white-space:nowrap;border:2px solid transparent;cursor:pointer;
   position:relative;overflow:hidden;
@@ -161,110 +234,177 @@ nav.scrolled{height:58px;box-shadow:var(--s2)}
 .d4{transition-delay:.32s}.d5{transition-delay:.40s}
 
 /* ════════════════════════════════
-   HERO  — split layout
+   HERO  — centered editorial + line field
 ════════════════════════════════ */
 #hero{
   min-height:100vh;
-  display:grid;grid-template-columns:1fr 1fr;
+  min-height:100dvh;
+  display:flex;
   align-items:center;
-  padding:8rem 5% 5rem;
-  gap:4rem;
-  position:relative;overflow:hidden;
-  background:var(--wh);
+  justify-content:center;
+  padding:max(6.1rem,env(safe-area-inset-top)) var(--pad-x) clamp(3rem,8vh,5rem);
+  position:relative;
+  overflow:hidden;
+  background:#fafbfc;
 }
-.hero-blob{
-  position:absolute;top:-200px;right:-150px;
-  width:700px;height:700px;border-radius:50%;
-  background:radial-gradient(circle,rgba(124,58,237,.08) 0%,transparent 68%);
+/* Layered backgrounds (lines + depth) */
+.hero-bg{position:absolute;inset:0;pointer-events:none;z-index:0}
+.hero-bg-grid{
+  position:absolute;inset:-1px;
+  background-image:
+    linear-gradient(rgba(26,26,46,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(26,26,46,.045) 1px,transparent 1px);
+  background-size:56px 56px;
+  background-position:center top;
+  mask-image:radial-gradient(ellipse 85% 70% at 50% 38%,#000 20%,transparent 72%);
+  -webkit-mask-image:radial-gradient(ellipse 85% 70% at 50% 38%,#000 20%,transparent 72%);
+}
+.hero-bg-grid2{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(124,58,237,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(124,58,237,.035) 1px,transparent 1px);
+  background-size:14px 14px;
+  background-position:7px 4px;
+  opacity:.85;
+  mask-image:radial-gradient(ellipse 75% 55% at 50% 42%,#000 0%,transparent 68%);
+  -webkit-mask-image:radial-gradient(ellipse 75% 55% at 50% 42%,#000 0%,transparent 68%);
+}
+.hero-bg-lines{
+  position:absolute;inset:0;
+  background:repeating-linear-gradient(
+    105deg,
+    transparent 0,
+    transparent 140px,
+    rgba(26,26,46,.04) 140px,
+    rgba(26,26,46,.04) 141px
+  );
+  opacity:.5;
+  mask-image:linear-gradient(180deg,transparent 0%,#000 25%,#000 75%,transparent 100%);
+  -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 25%,#000 75%,transparent 100%);
+}
+.hero-bg-vignette{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 55% 50% at 50% 35%,rgba(255,255,255,.92) 0%,transparent 62%),
+              radial-gradient(ellipse 90% 80% at 50% 100%,rgba(124,58,237,.06) 0%,transparent 45%);
+}
+.hero-bg-frame{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:min(92vw,56rem);height:min(78vh,44rem);
+  border:1px solid rgba(26,26,46,.08);
+  border-radius:2px;
   pointer-events:none;
+  opacity:.9;
 }
-.hero-blob2{
-  position:absolute;bottom:-120px;left:-80px;
-  width:400px;height:400px;border-radius:50%;
-  background:radial-gradient(circle,rgba(13,148,136,.06) 0%,transparent 68%);
-  pointer-events:none;
+.hero-bg-frame::before{
+  content:'';position:absolute;inset:12px;
+  border:1px dashed rgba(124,58,237,.12);
+  border-radius:1px;
 }
-.hero-left{position:relative;z-index:2}
-.hero-badge{
-  display:inline-flex;align-items:center;gap:.55rem;
-  background:var(--pu-badge);border:1px solid var(--pu-bb);
-  padding:.42rem 1.15rem;border-radius:100px;
-  font-size:.78rem;font-weight:600;color:var(--pu);
-  margin-bottom:1.6rem;box-shadow:var(--s1);
-  animation:fadeUp .7s ease .1s both;
+.hero-inner{
+  position:relative;z-index:2;
+  width:100%;max-width:42rem;
+  margin-inline:auto;
+  text-align:center;
+  display:flex;flex-direction:column;align-items:center;
+}
+.hero-kicker{
+  font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+  font-size:.65rem;
+  font-weight:600;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:var(--pu-d);
+  margin:0 0 clamp(1.75rem,4vw,2.35rem);
+  padding-top:1rem;
+  position:relative;
+  animation:fadeUp .65s ease .08s both;
+  max-width:100%;
+}
+.hero-kicker::before{
+  content:'';
+  position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:2.25rem;height:2px;background:var(--pu);
+  border-radius:2px;
 }
 .hero-h1{
-  font-family:var(--sans);font-size:clamp(2.5rem,4.5vw,4rem);
-  font-weight:900;line-height:1.05;color:var(--dk);
-  letter-spacing:-.025em;margin-bottom:1.3rem;
-  animation:fadeUp .8s ease .2s both;
+  font-family:var(--sans);
+  font-size:clamp(2.35rem,6.2vw,3.65rem);
+  font-weight:800;
+  line-height:1.18;
+  letter-spacing:-.035em;
+  color:var(--dk);
+  margin-bottom:clamp(1.75rem,4vw,2.5rem);
+  animation:fadeUp .75s ease .16s both;
 }
-.hero-h1 em{color:var(--pu);font-style:italic}
+.hero-h1 .hero-line{display:block}
+.hero-h1 .hero-line:last-child{
+  margin-top:.42em;
+  font-weight:900;
+  letter-spacing:-.04em;
+  line-height:1.15;
+}
+.hero-h1 .hero-mark{
+  background:linear-gradient(180deg,transparent 58%,rgba(124,58,237,.22) 58%,rgba(124,58,237,.22) 88%,transparent 88%);
+  padding:0 .06em;
+}
 .hero-p{
-  font-size:1rem;line-height:1.88;color:var(--mt);
-  max-width:460px;margin-bottom:2.2rem;
-  animation:fadeUp .8s ease .3s both;
+  font-size:clamp(.96rem,2.4vw,1.08rem);
+  line-height:1.82;
+  color:var(--tx2);
+  max-width:36em;
+  margin-bottom:clamp(2.25rem,5vw,3rem);
+  animation:fadeUp .75s ease .24s both;
 }
-.hero-ctas{display:flex;gap:.85rem;flex-wrap:wrap;animation:fadeUp .8s ease .4s both}
-/* Stats row below CTA */
+.hero-ctas{
+  display:flex;
+  gap:1rem;
+  flex-wrap:wrap;
+  justify-content:center;
+  animation:fadeUp .75s ease .32s both;
+}
 .hero-stats{
-  display:flex;gap:2.5rem;margin-top:2.5rem;
-  padding-top:2rem;border-top:1px solid var(--br);
-  animation:fadeUp .8s ease .5s both;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:stretch;
+  gap:0;
+  margin-top:clamp(2.75rem,6vw,3.75rem);
+  padding-top:clamp(2rem,4vw,2.75rem);
+  border-top:1px solid rgba(26,26,46,.1);
+  width:100%;
+  max-width:44rem;
+  animation:fadeUp .75s ease .4s both;
+}
+.hero-stat{
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+  flex:1 1 7.5rem;
+  min-width:min(100%,7.5rem);
+  max-width:14rem;
+  text-align:center;
+  padding:0 clamp(1.1rem,4vw,2.75rem);
+  border-left:1px solid rgba(26,26,46,.1);
+}
+.hero-stat:first-child{border-left:none;padding-left:clamp(.5rem,2vw,1rem)}
+.hero-stat:last-child{padding-right:clamp(.5rem,2vw,1rem)}
+.hero-stat-label{
+  font-size:.65rem;
+  font-weight:700;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--mt);
+  margin-bottom:.85rem;
+  line-height:1.35;
 }
 .hero-stat-num{
-  font-family:var(--sans);font-size:1.8rem;font-weight:900;color:var(--pu);line-height:1;
+  font-family:var(--sans);
+  font-size:clamp(1.65rem,3.8vw,2.05rem);
+  font-weight:900;
+  color:var(--dk);
+  font-variant-numeric:tabular-nums;
+  letter-spacing:-.03em;
+  line-height:1.05;
 }
-.hero-stat-label{font-size:.75rem;color:var(--mt);margin-top:.2rem}
-
-/* Right: stacked image collage */
-.hero-right{
-  position:relative;z-index:2;
-  display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;
-  gap:1rem;
-  animation:fadeUp .9s ease .35s both;
-}
-.hero-img-main{
-  grid-column:1/-1;
-  border-radius:16px;overflow:hidden;height:240px;
-  box-shadow:var(--s3);
-}
-.hero-img-main img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
-.hero-img-main:hover img{transform:scale(1.04)}
-.hero-img-s{
-  border-radius:12px;overflow:hidden;height:150px;
-  box-shadow:var(--s2);
-}
-.hero-img-s img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
-.hero-img-s:hover img{transform:scale(1.06)}
-/* Floating card on hero */
-.hero-float-card{
-  position:absolute;bottom:-16px;left:-24px;
-  background:#fff;border:1px solid var(--brp);
-  border-radius:14px;padding:.9rem 1.3rem;
-  box-shadow:0 12px 40px rgba(124,58,237,.15);
-  display:flex;align-items:center;gap:.8rem;
-  animation:floatCard 4s ease infinite;
-  z-index:5;
-}
-@keyframes floatCard{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-.hfc-icon{
-  width:40px;height:40px;border-radius:10px;
-  background:var(--pu-l);display:flex;align-items:center;justify-content:center;font-size:1.2rem;
-}
-.hfc-label{font-size:.7rem;font-weight:700;color:var(--mt);text-transform:uppercase;letter-spacing:.08em}
-.hfc-val{font-family:var(--sans);font-size:1rem;font-weight:800;color:var(--dk)}
-/* Second floating card */
-.hero-float-card2{
-  position:absolute;top:-10px;right:-16px;
-  background:var(--pu);border-radius:12px;padding:.75rem 1.1rem;
-  box-shadow:0 8px 28px rgba(124,58,237,.35);
-  animation:floatCard 5s ease 1.5s infinite;
-  z-index:5;
-}
-.hfc2-val{font-family:var(--sans);font-size:1.1rem;font-weight:900;color:#fff}
-.hfc2-label{font-size:.65rem;font-weight:600;color:rgba(255,255,255,.7);margin-top:.1rem}
-
 @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
 
 /* ══ MARQUEE ══ */
@@ -278,10 +418,11 @@ nav.scrolled{height:58px;box-shadow:var(--s2)}
    SERVICES  — creative bento grid
 ════════════════════════════════ */
 #services{
-  padding:7rem 5%;
+  padding:var(--section-y) var(--pad-x);
   background:var(--dk);
   position:relative;overflow:hidden;
 }
+#services > .svc-intro,#services > .bento{max-width:var(--content-max);margin-inline:auto}
 #services::before{
   content:'';position:absolute;inset:0;
   background-image:linear-gradient(rgba(124,58,237,.06) 1px,transparent 1px),
@@ -399,9 +540,11 @@ nav.scrolled{height:58px;box-shadow:var(--s2)}
 ════════════════════════════════ */
 #livechat{
   padding:0;
-  display:grid;grid-template-columns:1fr 1fr;
-  min-height:600px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  min-height:min(600px,90vh);
   overflow:hidden;
+  max-width:100%;
 }
 .lc-visual{
   position:relative;overflow:hidden;
@@ -453,9 +596,10 @@ nav.scrolled{height:58px;box-shadow:var(--s2)}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
 
 .lc-text{
-  padding:5rem 4.5rem;
+  padding:clamp(2.5rem,6vw,5rem) clamp(1.25rem,4vw,4.5rem);
   display:flex;flex-direction:column;justify-content:center;
   background:var(--wh);
+  min-width:0;
 }
 .lc-text .stitle{margin-bottom:1rem}
 .lc-text p{font-size:.94rem;line-height:1.88;color:var(--mt);margin-bottom:1.8rem}
@@ -484,10 +628,11 @@ nav.scrolled{height:58px;box-shadow:var(--s2)}
    — large number showcase
 ════════════════════════════════ */
 #why{
-  padding:7rem 5%;
+  padding:var(--section-y) var(--pad-x);
   background:linear-gradient(135deg,var(--dk) 0%,#1a0a3c 100%);
   position:relative;overflow:hidden;
 }
+#why > .why-header,#why > .why-grid{max-width:var(--content-max);margin-inline:auto}
 .why-bg-text{
   position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
   font-family:var(--sans);font-size:clamp(80px,14vw,180px);font-weight:900;
@@ -513,7 +658,12 @@ nav.scrolled{height:58px;box-shadow:var(--s2)}
   content:'';position:absolute;right:0;top:20%;bottom:20%;
   width:1px;background:rgba(196,181,253,.1);
 }
-.why-item:last-child::after{display:none}
+@media(min-width:1101px){
+  .why-item:last-child::after{display:none}
+}
+@media(max-width:1100px){
+  .why-item:nth-child(2n)::after{display:none}
+}
 .why-big{
   font-family:var(--sans);font-size:clamp(3rem,5vw,5rem);font-weight:900;
   color:var(--pu-m);line-height:1;margin-bottom:.4rem;
@@ -526,10 +676,11 @@ nav.scrolled{height:58px;box-shadow:var(--s2)}
    EFFICIENCY  — diagonal split
 ════════════════════════════════ */
 #efficiency{
-  padding:7rem 5%;
+  padding:var(--section-y) var(--pad-x);
   background:var(--lbg);
   position:relative;
 }
+#efficiency > .eff-grid{max-width:var(--content-max);margin-inline:auto}
 .eff-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
 .eff-img-stack{position:relative}
 .eff-img-main{
@@ -573,27 +724,33 @@ nav.scrolled{height:58px;box-shadow:var(--s2)}
    TRUSTED  — logo marquee
 ════════════════════════════════ */
 #trusted{
-  padding:4.5rem 5%;
+  padding:clamp(3rem,6vw,4.5rem) var(--pad-x);
   border-top:1px solid var(--br);
   border-bottom:1px solid var(--br);
   background:var(--wh);
   overflow:hidden;
 }
+#trusted > .trusted-head,#trusted > .clients-row{max-width:var(--content-max);margin-inline:auto}
+.clients-row{justify-content:center}
 .trusted-head{text-align:center;margin-bottom:2.8rem}
 .trusted-head p{font-size:.82rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mt)}
-.clients-row{display:flex;gap:1.5rem;align-items:center;justify-content:center;flex-wrap:wrap}
-.client-box{
-  width:130px;height:54px;background:var(--lbg);border:1px solid var(--br);
-  border-radius:8px;display:flex;align-items:center;justify-content:center;
-  font-size:.72rem;font-weight:700;color:var(--mt);letter-spacing:.08em;text-transform:uppercase;
-  transition:border-color .25s,background .25s,transform .25s,box-shadow .25s;
+.clients-row{display:flex;gap:clamp(1.75rem,4vw,3.25rem);align-items:center;justify-content:center;flex-wrap:wrap}
+.client-logo{
+  display:flex;align-items:center;justify-content:center;
+  padding:.35rem .25rem;
+  background:transparent;border:none;border-radius:0;
+  opacity:.82;
+  transition:opacity .25s ease,transform .25s ease;
 }
-.client-box:hover{border-color:var(--brp);background:var(--pu-l);transform:translateY(-2px);box-shadow:var(--s1)}
+.client-logo:hover{opacity:1;transform:translateY(-2px)}
+.client-logo img{display:block;height:clamp(24px,3.8vw,32px);width:auto;max-width:min(120px,26vw);object-fit:contain}
+.client-logo:focus-visible{outline:2px solid var(--pu);outline-offset:4px;border-radius:4px}
 
 /* ════════════════════════════════
    BUSINESS SOLUTIONS  — alternating rows
 ════════════════════════════════ */
-#solutions{padding:7rem 5%;background:var(--wh)}
+#solutions{padding:var(--section-y) var(--pad-x);background:var(--wh)}
+#solutions > .sol-header,#solutions > .sol-rows{max-width:var(--content-max);margin-inline:auto}
 .sol-header{margin-bottom:4rem}
 .sol-rows{display:flex;flex-direction:column;gap:1.5px;background:var(--br)}
 .sol-row{
@@ -627,7 +784,8 @@ nav.scrolled{height:58px;box-shadow:var(--s2)}
 /* ════════════════════════════════
    TESTIMONIALS  — masonry-style
 ════════════════════════════════ */
-#testimonials{padding:7rem 5%;background:var(--lbg)}
+#testimonials{padding:var(--section-y) var(--pad-x);background:var(--lbg)}
+#testimonials > .t-header,#testimonials > .t-grid{max-width:var(--content-max);margin-inline:auto}
 .t-header{margin-bottom:3.5rem}
 .t-grid{
   display:grid;grid-template-columns:repeat(3,1fr);
@@ -673,7 +831,8 @@ nav.scrolled{height:58px;box-shadow:var(--s2)}
 /* ════════════════════════════════
    PACKAGES  — horizontal scroll cards
 ════════════════════════════════ */
-#packages{padding:7rem 5%;background:var(--wh)}
+#packages{padding:var(--section-y) var(--pad-x);background:var(--wh)}
+#packages > .pkg-header,#packages > .pkg-grid{max-width:var(--content-max);margin-inline:auto}
 .pkg-header{text-align:center;margin-bottom:3.5rem}
 .pkg-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4rem;align-items:stretch}
 .pkg-card{
@@ -732,8 +891,8 @@ nav.scrolled{height:58px;box-shadow:var(--s2)}
 }
 .com-inner{
   position:relative;z-index:2;
-  padding:6.5rem 5%;width:100%;
-  display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;
+  padding:clamp(3.5rem,8vw,6.5rem) var(--pad-x);width:100%;max-width:var(--content-max);margin-inline:auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,5rem);align-items:center;
 }
 .com-left .stitle{margin-bottom:1rem}
 .com-left p{font-size:.95rem;line-height:1.85;color:rgba(255,255,255,.65);margin-bottom:2rem}
@@ -765,12 +924,13 @@ nav.scrolled{height:58px;box-shadow:var(--s2)}
 /* ════════════════════════════════
    BLOG  — editorial card
 ════════════════════════════════ */
-#blog{padding:7rem 5%;background:var(--lbg)}
+#blog{padding:var(--section-y) var(--pad-x);background:var(--lbg)}
+#blog > .blog-header{max-width:var(--content-max);margin-inline:auto}
 .blog-header{margin-bottom:2.5rem}
 .blog-card{
   display:grid;grid-template-columns:1.3fr 1fr;
   background:var(--wh);border:1.5px solid var(--br);border-radius:20px;
-  overflow:hidden;max-width:860px;
+  overflow:hidden;max-width:min(860px,100%);margin-inline:auto;
   box-shadow:var(--s2);
   transition:box-shadow .35s,transform .35s;
 }
@@ -792,7 +952,8 @@ nav.scrolled{height:58px;box-shadow:var(--s2)}
 /* ════════════════════════════════
    CONTACT  — two-panel
 ════════════════════════════════ */
-#contact{padding:7rem 5%;background:var(--wh)}
+#contact{padding:var(--section-y) var(--pad-x);background:var(--wh)}
+#contact > .ct-grid{max-width:var(--content-max);margin-inline:auto}
 .ct-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:5.5rem;align-items:start}
 .ct-info .stitle{margin-bottom:1rem}
 .ct-info .ssub{margin-bottom:2rem}
@@ -817,7 +978,7 @@ nav.scrolled{height:58px;box-shadow:var(--s2)}
 .ct-tile:hover{border-color:var(--brp);box-shadow:var(--s1);transform:translateY(-2px)}
 .ct-ico{font-size:1.35rem;margin-bottom:.45rem}
 .ct-lbl{font-size:.67rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mt);margin-bottom:.18rem}
-.ct-val{font-size:.84rem;font-weight:600;color:var(--dk)}
+.ct-val{font-size:.84rem;font-weight:600;color:var(--dk);overflow-wrap:anywhere}
 
 /* Form */
 .cf-box{
@@ -866,10 +1027,11 @@ textarea{resize:vertical;min-height:105px}
 
 /* ══ NEWSLETTER ══ */
 .nl-bar{
-  padding:3.5rem 5%;background:var(--pu-badge);
+  padding:clamp(2rem,5vw,3.5rem) var(--pad-x);background:var(--pu-badge);
   border-top:1px solid var(--pu-bb);border-bottom:1px solid var(--pu-bb);
   display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;
 }
+.nl-bar > div:first-child{flex:1;min-width:min(100%,220px);max-width:36rem}
 .nl-bar h3{font-family:var(--sans);font-size:1.3rem;font-weight:800;color:var(--dk);margin-bottom:.2rem}
 .nl-bar p{font-size:.85rem;color:var(--mt)}
 .nl-form{display:flex;gap:.7rem}
@@ -884,11 +1046,14 @@ textarea{resize:vertical;min-height:105px}
 .nl-form button:hover{background:var(--pu-d);box-shadow:0 7px 22px rgba(124,58,237,.38);transform:translateY(-1px)}
 
 /* ══ FOOTER ══ */
-footer{background:var(--dk);padding:5.5rem 5% 2.5rem}
+footer{background:var(--dk);padding:clamp(3rem,7vw,5.5rem) var(--pad-x) 2.5rem}
+footer > .ft-grid,footer > .ft-bottom{max-width:var(--content-max);margin-inline:auto}
 .ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem;margin-bottom:4rem}
 .ft-brand p{font-size:.84rem;color:rgba(255,255,255,.38);line-height:1.78;margin-top:.9rem;max-width:270px}
 .ft-brand .brand{font-family:var(--sans);font-size:1.2rem;font-weight:900;color:#fff}
-.ft-brand .brand span{color:var(--pu-m)}
+.ft-brand .brand .logo-patch{color:var(--pu-m)}
+.ft-brand .brand .logo-work{color:#99f6e4}
+.ft-brand .brand .logo-tm{font-size:.55em;color:rgba(255,255,255,.45);vertical-align:super;margin-left:.06em}
 .ft-col h4{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:1.4rem}
 .ft-links{list-style:none}
 .ft-links li{margin-bottom:.6rem}
@@ -913,48 +1078,69 @@ footer{background:var(--dk);padding:5.5rem 5% 2.5rem}
   .ft-grid{grid-template-columns:1fr 1fr;gap:2.5rem}
   .sol-row{grid-template-columns:60px 1fr 1fr auto}
 }
-@media(max-width:900px){
-  #hero{grid-template-columns:1fr;text-align:center;padding:8rem 5% 4rem}
-  .hero-right{display:none}
-  .hero-ctas,.hero-stats{justify-content:center}
-  .hero-stats{flex-wrap:wrap}
-  #livechat{grid-template-columns:1fr}
-  .lc-visual{min-height:320px}
-  .lc-text{padding:3.5rem 5%}
-  .eff-grid{grid-template-columns:1fr;gap:4rem}
-  .eff-stat-card{right:0;bottom:-20px}
-  .ct-grid{grid-template-columns:1fr;gap:3.5rem}
-  .t-grid{grid-template-columns:1fr 1fr}
+@media(max-width:1024px){
+  #hero{padding-top:max(5.65rem,env(safe-area-inset-top))}
+  nav{justify-content:space-between;padding-left:max(2rem,env(safe-area-inset-left));padding-right:max(2rem,env(safe-area-inset-right))}
+  nav .nav-inner{flex:1;justify-content:center;min-width:0}
   nav .navlinks{display:none}
-  .burger{display:flex}
-  nav{padding:0 1.5rem}
-  .com-inner{grid-template-columns:1fr;gap:2.5rem}
-  .blog-card{grid-template-columns:1fr}
-  .blog-img{min-height:220px}
-  .sol-row{grid-template-columns:50px 1fr auto}
+  .nav-cell--mid{display:none}
+  .nav-cell--end{display:none}
+  .burger{display:flex;margin-left:0}
+}
+@media(max-width:900px){
+  #hero{padding-top:max(5.5rem,env(safe-area-inset-top))}
+  .hero-bg-frame{width:min(94vw,100%);height:min(85vh,48rem)}
+  #livechat{grid-template-columns:1fr;min-height:0}
+  .lc-visual{min-height:min(380px,55vh)}
+  .eff-grid{grid-template-columns:1fr;gap:3rem}
+  .eff-stat-card{right:max(0px,env(safe-area-inset-right));bottom:-16px;left:auto;max-width:calc(100% - 1rem)}
+  .eff-img-main{height:min(420px,52vh)}
+  .ct-grid{grid-template-columns:1fr;gap:3rem}
+  .t-grid{grid-template-columns:1fr 1fr}
+  .com-inner{grid-template-columns:1fr;gap:2.5rem;padding-inline:var(--pad-x)}
+  .blog-card{grid-template-columns:1fr;max-width:100%}
+  .blog-img{min-height:200px}
+  .sol-row{grid-template-columns:48px 1fr auto;min-height:0}
   .sol-cell.sol-desc-cell{display:none}
+  .sol-cell{padding:1.35rem 1rem}
+  .sol-name{font-size:.98rem;line-height:1.35}
+}
+@media(max-width:420px){
+  .mmenu a{font-size:1.45rem}
 }
 @media(max-width:600px){
-  #hero h1{font-size:2.4rem}
+  .hero-h1{font-size:clamp(1.9rem,8vw,2.55rem)}
+  .hero-stats{flex-direction:column;gap:1.35rem;max-width:100%;padding-inline:0;border-top-width:1px}
+  .hero-stat{flex:none;max-width:none;border-left:none;padding:.25rem 0 0}
+  .hero-stat-num{font-size:clamp(1.45rem,6vw,1.75rem)}
   .t-grid{grid-template-columns:1fr}
   .pkg-grid{grid-template-columns:1fr}
   .bento .bc-5,.bento .bc-4,.bento .bc-3,.bento .bc-6,.bento .bc-7,.bento .bc-8,.bento .bc-full{grid-column:1/-1}
   .frow,.ct-tiles,.nl-form{flex-direction:column}
+  .nl-form{width:100%;max-width:24rem;margin-inline:auto}
   .nl-form input{width:100%}
+  .nl-form button{width:100%;padding:.85rem 1rem}
   .ft-grid{grid-template-columns:1fr;gap:2rem}
-  .hero-ctas{flex-direction:column;align-items:center}
+  .hero-ctas{flex-direction:column;align-items:stretch}
+  .hero-ctas .btn{text-align:center;justify-content:center;width:100%;max-width:22rem;margin-inline:auto}
+  .why-item::after{display:none!important}
+  .why-item{padding:2rem 1.25rem}
+  .svc-intro{flex-direction:column;align-items:flex-start}
+  .lc-visual-content{padding:clamp(1.5rem,5vw,4rem)}
+  .cf-box{padding:clamp(1.5rem,5vw,3rem)}
+  .t-card,.pkg-card{padding:1.75rem 1.35rem}
 }
 </style>
 </head>
 <body>
 
 <div class="loader" id="loader"><span>The PatchWork™</span></div>
-<button class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<button type="button" class="btt" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
 
 <!-- MOBILE MENU -->
-<div class="mmenu" id="mm">
-  <button class="mclose" onclick="closeMM()">✕</button>
-  <a href="#" onclick="closeMM()">Home</a>
+<div class="mmenu" id="mm" role="dialog" aria-modal="true" aria-label="Site menu">
+  <button type="button" class="mclose" onclick="closeMM()" aria-label="Close menu">✕</button>
+  <a href="#hero" onclick="closeMM()">Home</a>
   <a href="#services" onclick="closeMM()">Services</a>
   <a href="#packages" onclick="closeMM()">Pricing</a>
   <a href="#blog" onclick="closeMM()">Blog</a>
@@ -964,68 +1150,65 @@ footer{background:var(--dk);padding:5.5rem 5% 2.5rem}
 
 <!-- NAV -->
 <nav id="nav">
-  <a href="#" class="logo">
-    <div class="logo-icon">P</div>
-    <div class="logo-text"><span class="the">the</span><span class="brand">Patch<span>Work</span>™</span></div>
-  </a>
-  <ul class="navlinks">
-    <li><a href="#" class="act">Home +</a></li>
-    <li><a href="#livechat">About</a></li>
-    <li><a href="#services">Services +</a></li>
-    <li><a href="#blog">Blog</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#contact" class="nav-btn">Start Now</a></li>
-  </ul>
-  <div class="burger" id="burger" onclick="openMM()"><span></span><span></span><span></span></div>
-</nav>
-
-<!-- ═══ HERO ═══ -->
-<section id="hero">
-  <div class="hero-blob"></div>
-  <div class="hero-blob2"></div>
-  <div class="hero-left">
-    <div class="hero-badge">🎨 Seamless Business Solutions</div>
-    <h1 class="hero-h1">Professional <em>Support</em> for<br>Your Business Growth</h1>
-    <p class="hero-p">At The PatchWork™, we make it easier for businesses to thrive. With our all-in-one services, you're never alone in your journey. Don't do it alone—partner with us.</p>
-    <div class="hero-ctas">
-      <a href="#livechat" class="btn btn-pu">Learn More</a>
-      <a href="#services" class="btn btn-out">Explore Services</a>
+  <div class="nav-inner">
+    <div class="nav-cell nav-cell--start">
+      <a href="#hero" class="logo">
+        <div class="logo-icon">P</div>
+        <div class="logo-text"><span class="the">the</span><span class="brand"><span class="logo-patch">Patch</span><span class="logo-work">Work</span><span class="logo-tm">™</span></span></div>
+      </a>
     </div>
-    <div class="hero-stats">
-      <div>
-        <div class="hero-stat-num">3K+</div>
-        <div class="hero-stat-label">Businesses Served</div>
-      </div>
-      <div>
-        <div class="hero-stat-num">50+</div>
-        <div class="hero-stat-label">Countries Reached</div>
-      </div>
-      <div>
-        <div class="hero-stat-num">24/7</div>
-        <div class="hero-stat-label">Live Support</div>
-      </div>
+    <div class="nav-cell nav-cell--mid">
+      <ul class="navlinks">
+        <li><a href="#hero" class="act">Home</a></li>
+        <li><a href="#livechat">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="nav-cell nav-cell--end">
+      <a href="#contact" class="nav-btn">Start Now</a>
     </div>
   </div>
-  <div class="hero-right">
-    <div class="hero-img-main">
-      <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900&q=80&fit=crop" alt="Team collaboration">
+  <button type="button" class="burger" id="burger" onclick="openMM()" aria-label="Open menu" aria-expanded="false" aria-controls="mm">
+    <span class="burger-lines" aria-hidden="true"><span class="burger-bar"></span><span class="burger-bar"></span><span class="burger-bar"></span></span>
+  </button>
+</nav>
+
+<main id="main-content">
+<!-- ═══ HERO ═══ -->
+<section id="hero" aria-labelledby="hero-heading">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="hero-bg-vignette"></div>
+    <div class="hero-bg-grid"></div>
+    <div class="hero-bg-grid2"></div>
+    <div class="hero-bg-lines"></div>
+    <div class="hero-bg-frame"></div>
+  </div>
+  <div class="hero-inner">
+    <p class="hero-kicker">Digital studio · One crew</p>
+    <h1 class="hero-h1" id="hero-heading">
+      <span class="hero-line">Growth runs on detail.</span>
+      <span class="hero-line">We handle the <span class="hero-mark">patchwork</span>.</span>
+    </h1>
+    <p class="hero-p">Web builds, brand systems, SEO, virtual support, and live chat—wired together so you are not juggling five vendors. Same mission as always: keep your business moving while we own the execution.</p>
+    <div class="hero-ctas">
+      <a href="#livechat" class="btn btn-pu">How we plug in</a>
+      <a href="#services" class="btn btn-out">Service list</a>
     </div>
-    <div class="hero-img-s">
-      <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=500&q=75&fit=crop" alt="Design work">
-    </div>
-    <div class="hero-img-s">
-      <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=500&q=75&fit=crop" alt="Web development">
-    </div>
-    <div class="hero-float-card">
-      <div class="hfc-icon">⚡</div>
-      <div>
-        <div class="hfc-label">Efficiency Boost</div>
-        <div class="hfc-val">90% Improved</div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-label">Businesses served</div>
+        <div class="hero-stat-num">3K+</div>
       </div>
-    </div>
-    <div class="hero-float-card2">
-      <div class="hfc2-val">1M+</div>
-      <div class="hfc2-label">Businesses Trust Us</div>
+      <div class="hero-stat">
+        <div class="hero-stat-label">Countries</div>
+        <div class="hero-stat-num">50+</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-label">Live support</div>
+        <div class="hero-stat-num">24/7</div>
+      </div>
     </div>
   </div>
 </section>
@@ -1063,7 +1246,7 @@ footer{background:var(--dk);padding:5.5rem 5% 2.5rem}
   <div class="svc-intro rv">
     <div class="svc-intro-left">
       <div class="chip inv">Our Expertise</div>
-      <h2 class="stitle light">Explore the Range of <span>Services We Offer</span></h2>
+      <h2 class="stitle light">Digital services built for <span>modern businesses</span></h2>
     </div>
     <a href="#contact" class="btn btn-out" style="color:var(--pu-m);border-color:var(--pu-m)">Get Started</a>
     <div class="svc-count">14</div>
@@ -1259,8 +1442,7 @@ footer{background:var(--dk);padding:5.5rem 5% 2.5rem}
 </section>
 
 <!-- ═══ LIVE CHAT ═══ -->
-<section id="livechat" style="display:block;padding:0">
-  <div style="display:grid;grid-template-columns:1fr 1fr;min-height:600px">
+<section id="livechat" aria-labelledby="livechat-heading">
     <div class="lc-visual rvl" id="lcv">
       <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&q=80&fit=crop" alt="Support team" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.35">
       <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(26,26,46,.95) 0%,rgba(76,29,149,.85) 100%)"></div>
@@ -1276,22 +1458,21 @@ footer{background:var(--dk);padding:5.5rem 5% 2.5rem}
     </div>
     <div class="lc-text rvr">
       <div class="chip">Your Dedicated Support Team</div>
-      <h2 class="stitle">Boost lead generation and <span>customer engagement.</span></h2>
-      <p>At The PatchWork™, we provide 24/7 live chat support to ensure your business can engage with potential customers in real-time, helping you capture more leads and drive growth. Don't do it alone—our team is here to assist.</p>
+      <h2 class="stitle" id="livechat-heading">Grow leads and <span>customer engagement</span> with live support</h2>
+      <p>The PatchWork™ offers 24/7 live chat support so visitors get answers when it matters—turning questions into qualified leads and stronger customer relationships. Our team backs your sales and support workflows around the clock.</p>
       <ul class="check-list">
-        <li>Real-time customer assistance</li>
-        <li>Boost engagement and conversions</li>
-        <li>24/7 availability for global audiences</li>
+        <li>Real-time answers for shoppers and clients</li>
+        <li>Higher engagement and conversion-ready conversations</li>
+        <li>24/7 coverage for international time zones</li>
       </ul>
       <div class="btn-row">
-        <a href="#" class="btn btn-pu">Learn more</a>
+        <a href="#packages" class="btn btn-pu">View packages</a>
         <a href="#contact" class="cta-link">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          Chat with us now
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Start a conversation
         </a>
       </div>
     </div>
-  </div>
 </section>
 
 <!-- ═══ WHY CHOOSE US ═══ -->
@@ -1310,7 +1491,7 @@ footer{background:var(--dk);padding:5.5rem 5% 2.5rem}
 </section>
 
 <!-- ═══ EFFICIENCY ═══ -->
-<section id="efficiency" style="padding:7rem 5%;background:var(--lbg)">
+<section id="efficiency">
   <div class="eff-grid">
     <div class="rvl">
       <div class="eff-img-stack">
@@ -1330,18 +1511,18 @@ footer{background:var(--dk);padding:5.5rem 5% 2.5rem}
     </div>
     <div class="eff-text rvr">
       <div class="chip">Accelerate Your Business Growth</div>
-      <h2 class="stitle">Boost your potential with a <span>90% improvement in efficiency</span></h2>
-      <p>At The PatchWork™, we provide comprehensive solutions that help businesses scale efficiently. From web development to virtual assistance, we've got you covered. Let us help you unlock your full potential.</p>
+      <h2 class="stitle">Unlock up to a <span>90% gain in operational efficiency</span></h2>
+      <p>From responsive web development to virtual assistance and marketing operations, The PatchWork™ connects the dots across your digital stack—so your team spends less time on busywork and more time on revenue.</p>
       <ul class="eff-list">
         <li>Custom web and app development for seamless operations</li>
         <li>Professional branding and graphic design services</li>
         <li>Virtual assistance and administrative support</li>
       </ul>
       <div class="btn-row">
-        <a href="#" class="btn btn-pu">Learn more</a>
+        <a href="#services" class="btn btn-pu">Explore services</a>
         <a href="#contact" class="cta-link">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          Chat with us now
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Talk to our team
         </a>
       </div>
     </div>
@@ -1352,15 +1533,15 @@ footer{background:var(--dk);padding:5.5rem 5% 2.5rem}
 <section id="trusted">
   <div class="trusted-head rv">
     <div class="chip">Trusted by Businesses Worldwide</div>
-    <h2 class="stitle">Over 3000+ businesses &amp; online stores rely on <span>The PatchWork™</span></h2>
+    <h2 class="stitle">More than 3,000 businesses and online stores rely on <span>The PatchWork™</span></h2>
   </div>
   <div class="clients-row rv d2">
-    <div class="client-box">Client</div>
-    <div class="client-box">Client</div>
-    <div class="client-box">Client</div>
-    <div class="client-box">Client</div>
-    <div class="client-box">Client</div>
-    <div class="client-box">Client</div>
+    <a class="client-logo" href="https://openai.com" target="_blank" rel="noopener noreferrer" aria-label="OpenAI (opens in new tab)"><img src="logos/openai.svg" alt="" width="90" height="24" loading="lazy" decoding="async"></a>
+    <a class="client-logo" href="https://claude.ai" target="_blank" rel="noopener noreferrer" aria-label="Claude (opens in new tab)"><img src="logos/claude.svg" alt="" width="90" height="24" loading="lazy" decoding="async"></a>
+    <a class="client-logo" href="https://google.com" target="_blank" rel="noopener noreferrer" aria-label="Google (opens in new tab)"><img src="logos/google.svg" alt="" width="90" height="24" loading="lazy" decoding="async"></a>
+    <a class="client-logo" href="https://www.microsoft.com" target="_blank" rel="noopener noreferrer" aria-label="Microsoft (opens in new tab)"><img src="logos/microsoft.svg" alt="" width="90" height="24" loading="lazy" decoding="async"></a>
+    <a class="client-logo" href="https://www.amazon.com" target="_blank" rel="noopener noreferrer" aria-label="Amazon (opens in new tab)"><img src="logos/amazon.svg" alt="" width="90" height="24" loading="lazy" decoding="async"></a>
+    <a class="client-logo" href="https://www.meta.com" target="_blank" rel="noopener noreferrer" aria-label="Meta (opens in new tab)"><img src="logos/meta.svg" alt="" width="90" height="24" loading="lazy" decoding="async"></a>
   </div>
 </section>
 
@@ -1368,7 +1549,7 @@ footer{background:var(--dk);padding:5.5rem 5% 2.5rem}
 <section id="solutions">
   <div class="sol-header rv">
     <div class="chip">Business Solutions</div>
-    <h2 class="stitle">Elevate your business with <span>The PatchWork™ expertise</span></h2>
+    <h2 class="stitle">Scale faster with <span>end-to-end PatchWork™ expertise</span></h2>
   </div>
   <div class="sol-rows">
     <div class="sol-row rv">
@@ -1405,7 +1586,7 @@ footer{background:var(--dk);padding:5.5rem 5% 2.5rem}
 <section id="testimonials">
   <div class="t-header rv">
     <div class="chip">Success Stories</div>
-    <h2 class="stitle">What Our Clients Say About <span>The PatchWork™</span></h2>
+    <h2 class="stitle">Client reviews of our <span>web, design &amp; support work</span></h2>
   </div>
   <div class="t-grid">
     <div class="t-card featured rv">
@@ -1432,7 +1613,7 @@ footer{background:var(--dk);padding:5.5rem 5% 2.5rem}
 <!-- ═══ PACKAGES ═══ -->
 <section id="packages">
   <div class="pkg-header rv">
-    <div class="chip">GET A QUOTE</div>
+    <div class="chip">Request a quote</div>
     <h2 class="stitle">Get a customized <span>quote today</span></h2>
   </div>
   <div class="pkg-grid">
@@ -1499,7 +1680,7 @@ footer{background:var(--dk);padding:5.5rem 5% 2.5rem}
 <section id="blog">
   <div class="blog-header rv">
     <div class="chip">Our Blog</div>
-    <h2 class="stitle">Read our <span>latest blogs</span></h2>
+    <h2 class="stitle">Insights from our <span>business &amp; web blog</span></h2>
   </div>
   <div class="blog-card rv d1">
     <div class="blog-img">
@@ -1507,19 +1688,19 @@ footer{background:var(--dk);padding:5.5rem 5% 2.5rem}
     </div>
     <div class="blog-body">
       <div class="blog-meta"><span>Team Unstoppable</span><span>2 min read</span></div>
-      <div class="blog-title">Master Your Business: The Power of Streamlined Web Development</div>
-      <a href="https://www.i-patchwork.com/blog/master-your-business-the-power-of-streamlined-web/" class="blog-lnk">Read more →</a>
+      <div class="blog-title">Master your business with streamlined web development</div>
+      <a href="https://www.i-patchwork.com/blog/master-your-business-the-power-of-streamlined-web/" class="blog-lnk" rel="noopener noreferrer">Read article →</a>
     </div>
   </div>
 </section>
 
 <!-- ═══ CONTACT ═══ -->
-<section id="contact" style="padding:7rem 5%;background:var(--wh)">
+<section id="contact">
   <div class="ct-grid">
     <div class="rvl">
       <div class="chip">Contact Us</div>
       <h2 class="stitle">Get in <span>Touch</span></h2>
-      <p class="ssub">Ready to grow your business? Reach out and our team will get back to you within 24 hours.</p>
+      <p class="ssub">Tell us about your website, marketing, or operations goals—we reply within one business day with clear next steps.</p>
       <div class="ct-img">
         <img src="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=700&q=75&fit=crop" alt="Contact" loading="lazy">
       </div>
@@ -1569,6 +1750,7 @@ footer{background:var(--dk);padding:5.5rem 5% 2.5rem}
     </div>
   </div>
 </section>
+</main>
 
 <!-- NEWSLETTER -->
 <div class="nl-bar">
@@ -1586,7 +1768,7 @@ footer{background:var(--dk);padding:5.5rem 5% 2.5rem}
 <footer>
   <div class="ft-grid">
     <div class="ft-brand">
-      <div class="brand">Patch<span>Work</span>™</div>
+      <div class="brand"><span class="logo-patch">Patch</span><span class="logo-work">Work</span><span class="logo-tm">™</span></div>
       <p>At The PatchWork™, we make it easier for businesses to thrive. With our all-in-one services, you're never alone in your journey.</p>
     </div>
     <div class="ft-col">
@@ -1615,7 +1797,7 @@ footer{background:var(--dk);padding:5.5rem 5% 2.5rem}
     </div>
   </div>
   <div class="ft-bottom">
-    <p>© 2024 <a href="https://www.i-patchwork.com/">The PatchWork™.</a> All rights reserved.</p>
+    <p>© 2026 <a href="https://www.i-patchwork.com/">The PatchWork™</a>. All rights reserved.</p>
     <p>Privacy Policy · Terms of Service</p>
   </div>
 </footer>
@@ -1633,8 +1815,8 @@ window.addEventListener('scroll',()=>{
 
 // Mobile menu
 const burger=document.getElementById('burger');
-function openMM(){document.getElementById('mm').classList.add('open');burger.classList.add('open');document.body.style.overflow='hidden'}
-function closeMM(){document.getElementById('mm').classList.remove('open');burger.classList.remove('open');document.body.style.overflow=''}
+function openMM(){document.getElementById('mm').classList.add('open');burger.classList.add('open');burger.setAttribute('aria-expanded','true');document.body.style.overflow='hidden'}
+function closeMM(){document.getElementById('mm').classList.remove('open');burger.classList.remove('open');burger.setAttribute('aria-expanded','false');document.body.style.overflow=''}
 
 // Scroll reveal (all variants)
 const revEls=document.querySelectorAll('.rv,.rvl,.rvr,.rvs');
